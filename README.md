@@ -10,7 +10,7 @@ Algorithmic Foundations of Data Science group project of Azzam, Michel and Liam.
     * (Linux) `source .venv/bin/activate`
 3. Install dependencies into the venv:
     * `pip install -r requirements.txt`
-4. Run `python main.py`
+4. Run `python src/main.py`
 
 ### Adding new dependencies?
 
