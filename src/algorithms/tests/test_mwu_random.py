@@ -1,5 +1,5 @@
 import numpy as np
-from mwu.mwu_random import MultiplicativeWeightsRandom
+from algorithms.mwu_random import MultiplicativeWeightsRandom
 
 
 def test_initial_probabilities():

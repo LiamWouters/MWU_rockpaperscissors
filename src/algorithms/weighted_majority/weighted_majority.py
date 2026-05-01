@@ -2,7 +2,7 @@ import numpy as np
 from scipy.special import softmax, logsumexp
 
 
-class WeightedMajorityRandom:
+class WeightedMajority:
     """
     Deterministic Weighted Majority Algorithm.
 

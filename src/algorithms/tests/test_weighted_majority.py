@@ -1,16 +1,16 @@
 import numpy as np
-from mwu.weighted_majority import WeightedMajorityRandom
+from algorithms.weighted_majority import WeightedMajority
 
 
 def test_initial_weights():
-    model = WeightedMajorityRandom(n_experts=2, alpha=0.5)
+    model = WeightedMajority(n_experts=2, alpha=0.5)
 
     np.testing.assert_allclose(model.raw_weights, [1.0, 1.0])
     np.testing.assert_allclose(model.probabilities, [0.5, 0.5])
 
 
 def test_single_update():
-    model = WeightedMajorityRandom(n_experts=2, alpha=0.5)
+    model = WeightedMajority(n_experts=2, alpha=0.5)
 
     # expert 0 correct, expert 1 wrong
     loss = np.array([0, 1])
@@ -26,7 +26,7 @@ def test_single_update():
 
 
 def test_second_update_symmetry():
-    model = WeightedMajorityRandom(n_experts=2, alpha=0.5)
+    model = WeightedMajority(n_experts=2, alpha=0.5)
 
     loss1 = np.array([0, 1])
     model.update(loss1)
@@ -44,7 +44,7 @@ def test_second_update_symmetry():
 
 
 def test_prediction_majority_vote():
-    model = WeightedMajorityRandom(n_experts=2, alpha=0.5)
+    model = WeightedMajority(n_experts=2, alpha=0.5)
 
     expert_predictions = np.array([0, 0])
     # 1 is never predicted, so always predict 0
@@ -58,7 +58,7 @@ def test_2_experts_20_iterations():
     decay = 1 - alpha
     n_experts = 2
 
-    model = WeightedMajorityRandom(n_experts=n_experts, alpha=alpha)
+    model = WeightedMajority(n_experts=n_experts, alpha=alpha)
 
     # First 19 rounds: all wrong
     for _ in range(iterations - 1):
@@ -92,7 +92,7 @@ def test_100_experts_1M_iterations():
     decay = 1 - alpha
     n_experts = 100
 
-    model = WeightedMajorityRandom(n_experts=n_experts, alpha=alpha)
+    model = WeightedMajority(n_experts=n_experts, alpha=alpha)
 
     # First 9999 rounds: all wrong
     for _ in range(iterations - 1):
