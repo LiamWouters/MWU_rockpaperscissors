@@ -51,7 +51,7 @@ class MultiplicativeWeightsRandom:
         np.ndarray of shape (n_experts,)
             Logarithm of expert weights.
         """
-        return self._log_weights
+        return self._log_weights.copy()
 
     @property
     def raw_weights(self):
@@ -63,7 +63,7 @@ class MultiplicativeWeightsRandom:
         np.ndarray of shape (n_experts,)
             Expert weights.
         """
-        return np.exp(self._log_weights)
+        return np.exp(self._log_weights).copy()
 
     @property
     def probabilities(self):
