@@ -3,6 +3,8 @@ Algorithmic Foundations of Data Science group project of Azzam, Michel and Liam.
 
 ## Usage tutorial
 
+(Developed using python 3.13)
+
 1. Create python virtual environment (venv):
     * `python -m venv .venv` or `python3 -m venv .venv`
 2. Activate venv:

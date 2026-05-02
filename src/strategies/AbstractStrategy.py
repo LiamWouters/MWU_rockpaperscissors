@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from game import MOVES
+from game.util import MOVES
 
 
 class AbstractStrategy(ABC):

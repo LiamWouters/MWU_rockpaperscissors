@@ -3,7 +3,8 @@ from typing import Optional
 import numpy as np
 from algorithms import WeightedMajority
 from algorithms import WeightedMajorityRegretTracker
-from game import MOVES, LossComputer
+from game.util import MOVES
+from game import LossComputer
 from strategies import AbstractStrategy
 
 

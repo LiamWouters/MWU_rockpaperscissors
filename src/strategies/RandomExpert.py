@@ -1,4 +1,4 @@
-from game.Moves import MOVES
+from game.util import MOVES
 from strategies import AbstractStrategy
 import random
 

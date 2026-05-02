@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
 
 import numpy as np
-from game import MOVES
-
+from game.util import MOVES
 
 class LossComputer(ABC):
 

@@ -1,4 +1,3 @@
 # game/__init__.py
-from .Moves import MOVES
-from .RockPaperScissors import RPS
+from .GameRunner import GameRunner
 from .Loss import LossComputer
