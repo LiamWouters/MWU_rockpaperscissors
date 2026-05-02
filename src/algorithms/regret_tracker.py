@@ -10,7 +10,7 @@ class RegretTracker(ABC):
     def __init__(self, n_experts, alpha, max_t):
         self._n = n_experts
         self._alpha = alpha
-        self._max_t = max_t
+        self._max_t = max_t - 1
         self._t = 0
 
         self._cum_loss_experts = np.zeros(n_experts)
@@ -24,7 +24,7 @@ class RegretTracker(ABC):
     def update(self, loss_vector, learner_loss):
         loss_vector = np.asarray(loss_vector)
 
-        if self._t >= self._max_t:
+        if self._t > self._max_t:
             raise RuntimeError("Maximum time horizon exceeded")
 
         self._cum_loss_experts += loss_vector
@@ -33,6 +33,11 @@ class RegretTracker(ABC):
         best_expert_loss = np.min(self._cum_loss_experts)
 
         bound = self._compute_bound(best_expert_loss)
+
+        assert self._cum_loss_learner <= bound + 1e-9, (
+            f"Bound violated at t={self._t}: "
+            f"L_learner={self._cum_loss_learner}, bound={bound}"
+        )
 
         self._history_learner[self._t] = self._cum_loss_learner
         self._history_best[self._t] = best_expert_loss
