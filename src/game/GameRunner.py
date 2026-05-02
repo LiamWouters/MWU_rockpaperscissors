@@ -1,6 +1,6 @@
 from game.util.Enums import GAMESTATE, MOVES, GAMES
 from game.util import Button, get_font
-from game.screens import MainMenu
+from game.screens import MainMenu, GenerateInput, PlayAutoRPS, PlayAutoCF, PlayManualRPS
 import pygame
 
 class GameRunner:
@@ -17,6 +17,10 @@ class GameRunner:
         
         # Initialize screens
         self._main_menu = MainMenu(self.screen, self.game)
+        self._generate = GenerateInput(self.screen)
+        self._play_auto_rps = PlayAutoRPS(self.screen)
+        self._play_auto_cf = PlayAutoCF(self.screen)
+        self._play_manual_rps = PlayManualRPS(self.screen)
         
         # Start game loop
         self._game_loop()
@@ -32,21 +36,25 @@ class GameRunner:
                 if event.type == pygame.QUIT:
                     self.state = GAMESTATE.STOPPED
             
-            if self.state == GAMESTATE.MENU:
-                screenReturn = self._main_menu.process(events)
-            elif self.state == GAMESTATE.MANUAL:
-                # self._play_manual(events)
-                pass
-            elif self.state == GAMESTATE.AUTO:
-                # self._play_auto(events)
-                pass
+            match (self.state):
+                case GAMESTATE.MENU:
+                    screenReturn = self._main_menu.process(events)
+                case GAMESTATE.GENERATEINPUT:
+                    screenReturn = self._generate.process(events)
+                case GAMESTATE.PLAYAUTORPS:
+                    screenReturn = self._play_auto_rps.process(events)
+                case GAMESTATE.PLAYAUTOCF:
+                    screenReturn = self._play_auto_cf.process(events)
+                case GAMESTATE.PLAYMANUALRPS:
+                    screenReturn = self._play_manual_rps.process(events)
+                case GAMESTATE.STOPPED:
+                    return
             
             if screenReturn:
                 if isinstance(screenReturn, GAMESTATE):
                     self.state = screenReturn
                 elif isinstance(screenReturn, GAMES):
-                    self.game = screenReturn
-                    print(self.game)
+                    self._update_game(screenReturn)
                 else:
                     print("ERROR: Unknown return value from current screen:", screenReturn)
                     return
@@ -54,89 +62,5 @@ class GameRunner:
             pygame.display.update()
             self.clock.tick(30)
     
-    ####### PLACEHOLDERS #######
-    # def _play_manual(self, events):
-    #     pygame.display.set_caption("MWU | Rock Paper Scissors | Manual Play")
-        
-    #     # Persistent objects
-    #     BACK_BUTTON = Button(
-    #         pos=(self.screen.get_width()/2, self.screen.get_height()* 2/6),
-    #         width=100,
-    #         height=50,
-    #         font=get_font(18),
-    #         text="BACK",
-    #     )
-        
-    #     self.screen.fill("black")
-        
-    #     # Placeholder
-    #     PLACEHOLDER_TEXT = get_font(34).render("MANUAL PLAY (PLACEHOLDER)", True, white)
-    #     PLACEHOLDER_RECT = PLACEHOLDER_TEXT.get_rect(center=(self.screen.get_width()/2,self.screen.get_height()/6))
-    #     self.screen.blit(PLACEHOLDER_TEXT, PLACEHOLDER_RECT)
-        
-    #     for button in [BACK_BUTTON]:
-    #         button.draw(self.screen)
-            
-    #     # Handle events
-    #     for event in events:
-    #         if event.type == pygame.QUIT:
-    #             self.state = GAMESTATE.STOPPED
-    #         if event.type == pygame.MOUSEBUTTONUP:
-    #             if BACK_BUTTON.is_hovered():
-    #                 self.state = GAMESTATE.MENU
-    #                 return    
-    
-    # def _play_auto(self, events):
-    #     pygame.display.set_caption("MWU | Rock Paper Scissors | Auto Play")
-        
-    #     # Persistent Objects
-    #     BACK_BUTTON = Button(
-    #         pos=(self.screen.get_width()/2, self.screen.get_height()* 2/6),
-    #         width=100,
-    #         height=50,
-    #         font=get_font(18),
-    #         text="BACK",
-    #     )
-        
-    #     self.screen.fill("black")
-        
-    #     # Placeholder
-    #     PLACEHOLDER_TEXT = get_font(34).render("AUTO PLAY (PLACEHOLDER)", True, white)
-    #     PLACEHOLDER_RECT = PLACEHOLDER_TEXT.get_rect(center=(self.screen.get_width()/2,self.screen.get_height()/6))
-    #     self.screen.blit(PLACEHOLDER_TEXT, PLACEHOLDER_RECT)
-        
-    #     for button in [BACK_BUTTON]:
-    #         button.draw(self.screen)
-            
-    #     # Handle events
-    #     for event in events:
-    #         if event.type == pygame.QUIT:
-    #             self.state = GAMESTATE.STOPPED
-    #         if event.type == pygame.MOUSEBUTTONUP:
-    #             if BACK_BUTTON.is_hovered():
-    #                 self.state = GAMESTATE.MENU
-    #                 return
-                
-    # HELPERS
-    def _determine_winner(self, move1: MOVES, move2: MOVES):
-        """
-            Rock (0) beats Scissors (1),
-            Scissors (1) beats Paper (2),
-            Paper (2) beats Rock (0),
-            
-            Returns:
-             - None in case of a draw
-             - 1 if move1 wins
-             - 2 if move2 wins
-        """
-        dif = (move1 - move2)%3
-        print(f"{move1.name} vs. {move2.name}:")
-        if dif == 0: 
-            print(f"  -> {None}")
-            return None # Draw
-        elif dif == 1:
-            print(f"  -> {move2.name}") 
-            return 2
-        elif dif == 2: 
-            print(f"  -> {move1.name}")
-            return 1 
+    def _update_game(self, new_game):
+        self.game = new_game
