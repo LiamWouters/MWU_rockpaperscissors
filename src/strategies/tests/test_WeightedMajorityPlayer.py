@@ -29,7 +29,7 @@ class DummyLoss(LossComputer):
         return 0.0 if move == outcome else 1.0
 
 
-def test_mwu_player_exact_convergence_coin_game():
+def test_weighted_majority_player_coin_game():
     experts = [
         DummyExpert(CoinMove.TAILS),
         DummyExpert(CoinMove.HEADS),
@@ -45,14 +45,25 @@ def test_mwu_player_exact_convergence_coin_game():
         loss_computer=loss_fn,
         moves_enum=CoinMove,
         alpha=alpha,
-        regret_tracker=WeightedMajorityRegretTracker(len(experts), alpha, max_t=100),
+        regret_tracker=WeightedMajorityRegretTracker(len(experts), alpha, max_t=50),
     )
 
-    for i in range(T):
+    for t in range(T):
         move = player.play([])
-        if i >= 1:
+        if t >= 1:
             assert move == CoinMove.HEADS
         player.update(CoinMove.HEADS)
+
+        # after update
+        print(f"Step {t + 1}")
+        print("Cumulative loss per expert:", player.regret_tracker.cum_loss_experts)
+        print("Learner cumulative loss:", player.regret_tracker.cum_loss_learner)
+
+        print("Learner loss over time:", player.regret_tracker.history_learner)
+        print("Best expert loss over time:", player.regret_tracker.history_best)
+        print("Regret bound over time:", player.regret_tracker.history_bound)
+        print("Expert losses over time:\n", player.regret_tracker.history_experts)
+        print("\n")
 
     probs = player.probabilities
 

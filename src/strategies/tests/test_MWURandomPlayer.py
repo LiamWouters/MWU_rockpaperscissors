@@ -1,5 +1,6 @@
 import numpy as np
 
+from algorithms import MWURegretTracker
 from strategies import AbstractStrategy, MWURandomPlayer
 from game import LossComputer
 from enum import IntEnum
@@ -26,7 +27,7 @@ class DummyLoss(LossComputer):
         return 0.0 if move == outcome else 1.0
 
 
-def test_mwu_random_player_concentrates_on_best_expert():
+def test_mwu_random_player_coin_game():
     experts = [
         DummyExpert(CoinMove.TAILS),  # always wrong
         DummyExpert(CoinMove.HEADS),  # always correct
@@ -34,20 +35,32 @@ def test_mwu_random_player_concentrates_on_best_expert():
 
     loss_fn = DummyLoss()
 
+    alpha = 0.5
     player = MWURandomPlayer(
         experts=experts,
         loss_computer=loss_fn,
         moves_enum=CoinMove,
         alpha=0.5,
         seed=42,
+        regret_tracker=MWURegretTracker(len(experts), alpha, max_t=200),
     )
 
     T = 200
 
     # training phase
-    for _ in range(T):
+    for t in range(T):
         player.play([])
         player.update(CoinMove.HEADS)
+        # after update
+        print(f"Step {t + 1}")
+        print("Cumulative loss per expert:", player.regret_tracker.cum_loss_experts)
+        print("Learner cumulative loss:", player.regret_tracker.cum_loss_learner)
+
+        print("Learner loss over time:", player.regret_tracker.history_learner)
+        print("Best expert loss over time:", player.regret_tracker.history_best)
+        print("Regret bound over time:", player.regret_tracker.history_bound)
+        print("Expert losses over time:\n", player.regret_tracker.history_experts)
+        print("\n")
 
     probs = player.probabilities
 
