@@ -17,11 +17,15 @@ class MultiplicativeWeightsRandom:
         - large alpha: fast penalization of errors
 
         Must satisfy 0 < alpha < 1.
+
+    seed : int, default=42
     """
 
-    def __init__(self, n_experts, alpha=0.5):
+    def __init__(self, n_experts, alpha=0.5, seed: int = 42):
         assert n_experts >= 1, "Number of experts must be at least 1"
         assert 0 < alpha < 1, "alpha must be in the open interval (0, 1)"
+
+        self._rng = np.random.default_rng(seed)
 
         self._alpha = alpha
         self._log_decay = np.log(1 - alpha)
@@ -86,7 +90,7 @@ class MultiplicativeWeightsRandom:
         int
             Index of the selected expert.
         """
-        return np.random.choice(self._n, p=self._probs)
+        return self._rng.choice(self._n, p=self._probs)
 
     def expected_loss(self, loss_vector):
         """
