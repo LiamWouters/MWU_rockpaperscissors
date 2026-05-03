@@ -9,9 +9,9 @@ class MOVES(IntEnum):
     PAPER = 2
     SCISSORS = 1
 
-class COINFACE(IntEnum):
-    TAILS = 0
-    HEADS = 1
+class COINFACE(Enum):
+    TAILS = "TAILS"
+    HEADS = "HEADS"
     
 class GAMESTATE(IntEnum):
     STOPPED = 0

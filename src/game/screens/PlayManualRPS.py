@@ -2,6 +2,8 @@ import os, pygame
 from game.util import GAMESTATE, GAMES, get_font, Button
 from .GameScreen import *
 
+# TODO: (optional) manual playing for more interactivity (presentation)
+
 RPS_HISTORY_FILE_PATH = os.path.join(os.getcwd(), "RPS_manual_history.txt")
 
 class PlayManualRPS(GameScreen):
@@ -9,11 +11,11 @@ class PlayManualRPS(GameScreen):
         super().__init__(screen)
         
         # Create input file if it does not exist
-        open(RPS_HISTORY_FILE_PATH, 'a').close()
+        open(RPS_HISTORY_FILE_PATH, 'w').close()
         
         # Initialize persistent elements
         self.elements["TITLE_TEXT"] = get_font(34).render(f"Manual Play {GAMES.RPS.value}", True, white)
-        self.elements["TITLE_RECT"] = self.elements["TITLE_TEXT"].get_rect(center=(self.screen.get_width()/2,self.screen.get_height()/10)),
+        self.elements["TITLE_RECT"] = self.elements["TITLE_TEXT"].get_rect(center=(self.screen.get_width()/2,self.screen.get_height()/16)),
         self.elements["BACK_BUTTON"] = Button(
             pos=(100, 50),
             font=get_font(18),

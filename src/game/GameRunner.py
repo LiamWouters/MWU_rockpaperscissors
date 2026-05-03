@@ -1,5 +1,4 @@
-from game.util.Enums import GAMESTATE, MOVES, GAMES
-from game.util import Button, get_font
+from game.util.Enums import GAMESTATE, GAMES
 from game.screens import MainMenu, GenerateInput, PlayAutoRPS, PlayAutoCF, PlayManualRPS
 import pygame
 
@@ -47,10 +46,8 @@ class GameRunner:
                     screenReturn = self._play_auto_cf.process(events)
                 case GAMESTATE.PLAYMANUALRPS:
                     screenReturn = self._play_manual_rps.process(events)
-                case GAMESTATE.STOPPED:
-                    return
             
-            if screenReturn:
+            if screenReturn != None:
                 if isinstance(screenReturn, GAMESTATE):
                     self.state = screenReturn
                 elif isinstance(screenReturn, GAMES):

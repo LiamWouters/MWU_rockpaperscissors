@@ -1,5 +1,3 @@
-# Inspired by: https://thepythoncode.com/article/make-a-button-using-pygame-in-python
-#          and https://www.youtube.com/watch?v=GMBqjxcKogA
 import pygame
 from .UIelement import UIelement
 

@@ -20,7 +20,7 @@ class MainMenu(GameScreen):
             pos=(self.screen.get_width()/2, self.screen.get_height()* 3/6),
             font=get_font(18),
             text="Generate Input (For Play Auto)",
-            show_bounding_box=True
+            show_bounding_box=False
         )
         self.elements["PLAY_MANUAL_BUTTON"] = Button(
             pos=(self.screen.get_width()/2, self.screen.get_height()* 4/6),
