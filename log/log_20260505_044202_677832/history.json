@@ -1,0 +1,3231 @@
+{
+  "metadata": {
+    "game": "Rock-Paper-Scissors",
+    "mode": "auto",
+    "algorithm": "mwu_random",
+    "input_file": "C:\\Users\\ThinkPad\\Documents\\Study\\Master\\Sem2\\fundamental-alg\\mwu_project\\RPS_input.txt",
+    "log_dir": "C:\\Users\\ThinkPad\\Documents\\Study\\Master\\Sem2\\fundamental-alg\\mwu_project\\log\\log_20260505_044202_677832",
+    "alpha": 0.5,
+    "seed": 42,
+    "experts": [
+      "always_random",
+      "first_random_then_fixed",
+      "copycat_last_human",
+      "beat_last_human"
+    ],
+    "total_input_moves": 34,
+    "parse_errors": [],
+    "created_at": "2026-05-05T04:42:02"
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "human_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "mwu_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "beat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        }
+      },
+      "weights_before": {
+        "raw": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "log": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "probabilities": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          1.0,
+          0.7071067811865476,
+          0.7071067811865476,
+          0.7071067811865476
+        ],
+        "log": [
+          0.0,
+          -0.34657359027997264,
+          -0.34657359027997264,
+          -0.34657359027997264
+        ],
+        "probabilities": [
+          0.32037724101704074,
+          0.22654091966098644,
+          0.22654091966098644,
+          0.22654091966098644
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 0.0,
+          "first_random_then_fixed": 0.5,
+          "copycat_last_human": 0.5,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 0.5,
+        "expert_losses": {
+          "always_random": 0.0,
+          "first_random_then_fixed": 0.5,
+          "copycat_last_human": 0.5,
+          "beat_last_human": 0.5
+        },
+        "best_expert_loss": 0.0,
+        "regret_to_best_expert": 0.5
+      }
+    },
+    {
+      "round": 2,
+      "human_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "mwu_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "selected_expert": {
+        "index": 1,
+        "name": "first_random_then_fixed"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "beat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        }
+      },
+      "weights_before": {
+        "raw": [
+          1.0,
+          0.7071067811865476,
+          0.7071067811865476,
+          0.7071067811865476
+        ],
+        "log": [
+          0.0,
+          -0.34657359027997264,
+          -0.34657359027997264,
+          -0.34657359027997264
+        ],
+        "probabilities": [
+          0.32037724101704074,
+          0.22654091966098644,
+          0.22654091966098644,
+          0.22654091966098644
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          1.0,
+          0.5,
+          0.5,
+          0.7071067811865476
+        ],
+        "log": [
+          0.0,
+          -0.6931471805599453,
+          -0.6931471805599453,
+          -0.34657359027997264
+        ],
+        "probabilities": [
+          0.3693980625181293,
+          0.18469903125906464,
+          0.18469903125906464,
+          0.2612038749637415
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 0.0,
+          "first_random_then_fixed": 0.5,
+          "copycat_last_human": 0.5,
+          "beat_last_human": 0.0
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 1.0,
+        "expert_losses": {
+          "always_random": 0.0,
+          "first_random_then_fixed": 1.0,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        },
+        "best_expert_loss": 0.0,
+        "regret_to_best_expert": 1.0
+      }
+    },
+    {
+      "round": 3,
+      "human_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "mwu_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "beat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        }
+      },
+      "weights_before": {
+        "raw": [
+          1.0,
+          0.5,
+          0.5,
+          0.7071067811865476
+        ],
+        "log": [
+          0.0,
+          -0.6931471805599453,
+          -0.6931471805599453,
+          -0.34657359027997264
+        ],
+        "probabilities": [
+          0.3693980625181293,
+          0.18469903125906464,
+          0.18469903125906464,
+          0.2612038749637415
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.5,
+          0.25,
+          0.25,
+          0.5
+        ],
+        "log": [
+          -0.6931471805599453,
+          -1.3862943611198906,
+          -1.3862943611198906,
+          -0.6931471805599453
+        ],
+        "probabilities": [
+          0.3333333333333333,
+          0.16666666666666666,
+          0.16666666666666666,
+          0.3333333333333333
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 1.0,
+          "first_random_then_fixed": 1.0,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 1.5,
+        "expert_losses": {
+          "always_random": 1.0,
+          "first_random_then_fixed": 2.0,
+          "copycat_last_human": 2.0,
+          "beat_last_human": 1.0
+        },
+        "best_expert_loss": 1.0,
+        "regret_to_best_expert": 0.5
+      }
+    },
+    {
+      "round": 4,
+      "human_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "mwu_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "beat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.5,
+          0.25,
+          0.25,
+          0.5
+        ],
+        "log": [
+          -0.6931471805599453,
+          -1.3862943611198906,
+          -1.3862943611198906,
+          -0.6931471805599453
+        ],
+        "probabilities": [
+          0.3333333333333333,
+          0.16666666666666666,
+          0.16666666666666666,
+          0.3333333333333333
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.25,
+          0.25,
+          0.12500000000000003,
+          0.3535533905932738
+        ],
+        "log": [
+          -1.3862943611198906,
+          -1.3862943611198906,
+          -2.0794415416798357,
+          -1.0397207708399179
+        ],
+        "probabilities": [
+          0.25547916179456587,
+          0.25547916179456587,
+          0.12773958089728293,
+          0.36130209551358533
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 1.0,
+          "first_random_then_fixed": 0.0,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 2.0,
+        "expert_losses": {
+          "always_random": 2.0,
+          "first_random_then_fixed": 2.0,
+          "copycat_last_human": 3.0,
+          "beat_last_human": 1.5
+        },
+        "best_expert_loss": 1.5,
+        "regret_to_best_expert": 0.5
+      }
+    },
+    {
+      "round": 5,
+      "human_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "mwu_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "selected_expert": {
+        "index": 0,
+        "name": "always_random"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "beat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.25,
+          0.25,
+          0.12500000000000003,
+          0.3535533905932738
+        ],
+        "log": [
+          -1.3862943611198906,
+          -1.3862943611198906,
+          -2.0794415416798357,
+          -1.0397207708399179
+        ],
+        "probabilities": [
+          0.25547916179456587,
+          0.25547916179456587,
+          0.12773958089728293,
+          0.36130209551358533
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.12500000000000003,
+          0.1767766952966369,
+          0.0625,
+          0.25
+        ],
+        "log": [
+          -2.0794415416798357,
+          -1.7328679513998633,
+          -2.772588722239781,
+          -1.3862943611198906
+        ],
+        "probabilities": [
+          0.20349135976847857,
+          0.2877802408103251,
+          0.10174567988423927,
+          0.4069827195369571
+        ]
+      },
+      "losses": {
+        "mwu": 1.0,
+        "experts": {
+          "always_random": 1.0,
+          "first_random_then_fixed": 0.5,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "human_win",
+      "cumulative": {
+        "mwu_loss": 3.0,
+        "expert_losses": {
+          "always_random": 3.0,
+          "first_random_then_fixed": 2.5,
+          "copycat_last_human": 4.0,
+          "beat_last_human": 2.0
+        },
+        "best_expert_loss": 2.0,
+        "regret_to_best_expert": 1.0
+      }
+    },
+    {
+      "round": 6,
+      "human_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "mwu_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "beat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.12500000000000003,
+          0.1767766952966369,
+          0.0625,
+          0.25
+        ],
+        "log": [
+          -2.0794415416798357,
+          -1.7328679513998633,
+          -2.772588722239781,
+          -1.3862943611198906
+        ],
+        "probabilities": [
+          0.20349135976847857,
+          0.2877802408103251,
+          0.10174567988423927,
+          0.4069827195369571
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.08838834764831845,
+          0.08838834764831845,
+          0.03125,
+          0.1767766952966369
+        ],
+        "log": [
+          -2.4260151319598084,
+          -2.4260151319598084,
+          -3.4657359027997265,
+          -1.7328679513998633
+        ],
+        "probabilities": [
+          0.22969742421459693,
+          0.22969742421459693,
+          0.08121030314161228,
+          0.45939484842919376
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 0.5,
+          "first_random_then_fixed": 1.0,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 3.5,
+        "expert_losses": {
+          "always_random": 3.5,
+          "first_random_then_fixed": 3.5,
+          "copycat_last_human": 5.0,
+          "beat_last_human": 2.5
+        },
+        "best_expert_loss": 2.5,
+        "regret_to_best_expert": 1.0
+      }
+    },
+    {
+      "round": 7,
+      "human_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "mwu_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "beat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.08838834764831845,
+          0.08838834764831845,
+          0.03125,
+          0.1767766952966369
+        ],
+        "log": [
+          -2.4260151319598084,
+          -2.4260151319598084,
+          -3.4657359027997265,
+          -1.7328679513998633
+        ],
+        "probabilities": [
+          0.22969742421459693,
+          0.22969742421459693,
+          0.08121030314161228,
+          0.45939484842919376
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.04419417382415922,
+          0.08838834764831845,
+          0.015625000000000007,
+          0.12500000000000003
+        ],
+        "log": [
+          -3.119162312519754,
+          -2.4260151319598084,
+          -4.1588830833596715,
+          -2.0794415416798357
+        ],
+        "probabilities": [
+          0.16176045807952344,
+          0.3235209161590469,
+          0.05719095841793666,
+          0.45752766734349315
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 1.0,
+          "first_random_then_fixed": 0.0,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 4.0,
+        "expert_losses": {
+          "always_random": 4.5,
+          "first_random_then_fixed": 3.5,
+          "copycat_last_human": 6.0,
+          "beat_last_human": 3.0
+        },
+        "best_expert_loss": 3.0,
+        "regret_to_best_expert": 1.0
+      }
+    },
+    {
+      "round": 8,
+      "human_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "mwu_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "beat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.04419417382415922,
+          0.08838834764831845,
+          0.015625000000000007,
+          0.12500000000000003
+        ],
+        "log": [
+          -3.119162312519754,
+          -2.4260151319598084,
+          -4.1588830833596715,
+          -2.0794415416798357
+        ],
+        "probabilities": [
+          0.16176045807952344,
+          0.3235209161590469,
+          0.05719095841793666,
+          0.45752766734349315
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.022097086912079608,
+          0.08838834764831845,
+          0.01104854345603981,
+          0.12500000000000003
+        ],
+        "log": [
+          -3.8123094930796992,
+          -2.4260151319598084,
+          -4.505456673639644,
+          -2.0794415416798357
+        ],
+        "probabilities": [
+          0.08963099970993152,
+          0.35852399883972613,
+          0.044815499854965773,
+          0.5070295015953765
+        ]
+      },
+      "losses": {
+        "mwu": 0.0,
+        "experts": {
+          "always_random": 1.0,
+          "first_random_then_fixed": 0.0,
+          "copycat_last_human": 0.5,
+          "beat_last_human": 0.0
+        }
+      },
+      "result": "mwu_win",
+      "cumulative": {
+        "mwu_loss": 4.0,
+        "expert_losses": {
+          "always_random": 5.5,
+          "first_random_then_fixed": 3.5,
+          "copycat_last_human": 6.5,
+          "beat_last_human": 3.0
+        },
+        "best_expert_loss": 3.0,
+        "regret_to_best_expert": 1.0
+      }
+    },
+    {
+      "round": 9,
+      "human_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "mwu_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "selected_expert": {
+        "index": 1,
+        "name": "first_random_then_fixed"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "beat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.022097086912079608,
+          0.08838834764831845,
+          0.01104854345603981,
+          0.12500000000000003
+        ],
+        "log": [
+          -3.8123094930796992,
+          -2.4260151319598084,
+          -4.505456673639644,
+          -2.0794415416798357
+        ],
+        "probabilities": [
+          0.08963099970993152,
+          0.35852399883972613,
+          0.044815499854965773,
+          0.5070295015953765
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.01104854345603981,
+          0.08838834764831845,
+          0.007812500000000002,
+          0.12500000000000003
+        ],
+        "log": [
+          -4.505456673639644,
+          -2.4260151319598084,
+          -4.852030263919617,
+          -2.0794415416798357
+        ],
+        "probabilities": [
+          0.04757189417592611,
+          0.38057515340740883,
+          0.03363840896568618,
+          0.5382145434509789
+        ]
+      },
+      "losses": {
+        "mwu": 0.0,
+        "experts": {
+          "always_random": 1.0,
+          "first_random_then_fixed": 0.0,
+          "copycat_last_human": 0.5,
+          "beat_last_human": 0.0
+        }
+      },
+      "result": "mwu_win",
+      "cumulative": {
+        "mwu_loss": 4.0,
+        "expert_losses": {
+          "always_random": 6.5,
+          "first_random_then_fixed": 3.5,
+          "copycat_last_human": 7.0,
+          "beat_last_human": 3.0
+        },
+        "best_expert_loss": 3.0,
+        "regret_to_best_expert": 1.0
+      }
+    },
+    {
+      "round": 10,
+      "human_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "mwu_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "selected_expert": {
+        "index": 2,
+        "name": "copycat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "beat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.01104854345603981,
+          0.08838834764831845,
+          0.007812500000000002,
+          0.12500000000000003
+        ],
+        "log": [
+          -4.505456673639644,
+          -2.4260151319598084,
+          -4.852030263919617,
+          -2.0794415416798357
+        ],
+        "probabilities": [
+          0.04757189417592611,
+          0.38057515340740883,
+          0.03363840896568618,
+          0.5382145434509789
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.01104854345603981,
+          0.0625,
+          0.003906250000000001,
+          0.08838834764831845
+        ],
+        "log": [
+          -4.505456673639644,
+          -2.772588722239781,
+          -5.545177444479562,
+          -2.4260151319598084
+        ],
+        "probabilities": [
+          0.0666204425607654,
+          0.37686213360292864,
+          0.023553883350183043,
+          0.532963540486123
+        ]
+      },
+      "losses": {
+        "mwu": 1.0,
+        "experts": {
+          "always_random": 0.0,
+          "first_random_then_fixed": 0.5,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "human_win",
+      "cumulative": {
+        "mwu_loss": 5.0,
+        "expert_losses": {
+          "always_random": 6.5,
+          "first_random_then_fixed": 4.0,
+          "copycat_last_human": 8.0,
+          "beat_last_human": 3.5
+        },
+        "best_expert_loss": 3.5,
+        "regret_to_best_expert": 1.5
+      }
+    },
+    {
+      "round": 11,
+      "human_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "mwu_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "selected_expert": {
+        "index": 1,
+        "name": "first_random_then_fixed"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "beat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.01104854345603981,
+          0.0625,
+          0.003906250000000001,
+          0.08838834764831845
+        ],
+        "log": [
+          -4.505456673639644,
+          -2.772588722239781,
+          -5.545177444479562,
+          -2.4260151319598084
+        ],
+        "probabilities": [
+          0.0666204425607654,
+          0.37686213360292864,
+          0.023553883350183043,
+          0.532963540486123
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.005524271728019904,
+          0.04419417382415922,
+          0.0027621358640099515,
+          0.08838834764831845
+        ],
+        "log": [
+          -5.19860385419959,
+          -3.119162312519754,
+          -5.891751034759535,
+          -2.4260151319598084
+        ],
+        "probabilities": [
+          0.0392156862745098,
+          0.31372549019607837,
+          0.0196078431372549,
+          0.6274509803921569
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 1.0,
+          "first_random_then_fixed": 0.5,
+          "copycat_last_human": 0.5,
+          "beat_last_human": 0.0
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 5.5,
+        "expert_losses": {
+          "always_random": 7.5,
+          "first_random_then_fixed": 4.5,
+          "copycat_last_human": 8.5,
+          "beat_last_human": 3.5
+        },
+        "best_expert_loss": 3.5,
+        "regret_to_best_expert": 2.0
+      }
+    },
+    {
+      "round": 12,
+      "human_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "mwu_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "beat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.005524271728019904,
+          0.04419417382415922,
+          0.0027621358640099515,
+          0.08838834764831845
+        ],
+        "log": [
+          -5.19860385419959,
+          -3.119162312519754,
+          -5.891751034759535,
+          -2.4260151319598084
+        ],
+        "probabilities": [
+          0.0392156862745098,
+          0.31372549019607837,
+          0.0196078431372549,
+          0.6274509803921569
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.0027621358640099515,
+          0.022097086912079608,
+          0.0013810679320049757,
+          0.0625
+        ],
+        "log": [
+          -5.891751034759535,
+          -3.8123094930796992,
+          -6.58489821531948,
+          -2.772588722239781
+        ],
+        "probabilities": [
+          0.031126062828617716,
+          0.24900850262894167,
+          0.015563031414308854,
+          0.7043024031281316
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 1.0,
+          "first_random_then_fixed": 1.0,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 6.0,
+        "expert_losses": {
+          "always_random": 8.5,
+          "first_random_then_fixed": 5.5,
+          "copycat_last_human": 9.5,
+          "beat_last_human": 4.0
+        },
+        "best_expert_loss": 4.0,
+        "regret_to_best_expert": 2.0
+      }
+    },
+    {
+      "round": 13,
+      "human_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "mwu_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "beat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.0027621358640099515,
+          0.022097086912079608,
+          0.0013810679320049757,
+          0.0625
+        ],
+        "log": [
+          -5.891751034759535,
+          -3.8123094930796992,
+          -6.58489821531948,
+          -2.772588722239781
+        ],
+        "probabilities": [
+          0.031126062828617716,
+          0.24900850262894167,
+          0.015563031414308854,
+          0.7043024031281316
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.001953125,
+          0.022097086912079608,
+          0.0006905339660024878,
+          0.04419417382415922
+        ],
+        "log": [
+          -6.238324625039508,
+          -3.8123094930796992,
+          -7.278045395879426,
+          -3.119162312519754
+        ],
+        "probabilities": [
+          0.028332882789105465,
+          0.3205499768118415,
+          0.010017186775370042,
+          0.641099953623683
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 0.5,
+          "first_random_then_fixed": 0.0,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 6.5,
+        "expert_losses": {
+          "always_random": 9.0,
+          "first_random_then_fixed": 5.5,
+          "copycat_last_human": 10.5,
+          "beat_last_human": 4.5
+        },
+        "best_expert_loss": 4.5,
+        "regret_to_best_expert": 2.0
+      }
+    },
+    {
+      "round": 14,
+      "human_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "mwu_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "beat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.001953125,
+          0.022097086912079608,
+          0.0006905339660024878,
+          0.04419417382415922
+        ],
+        "log": [
+          -6.238324625039508,
+          -3.8123094930796992,
+          -7.278045395879426,
+          -3.119162312519754
+        ],
+        "probabilities": [
+          0.028332882789105465,
+          0.3205499768118415,
+          0.010017186775370042,
+          0.641099953623683
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.0013810679320049757,
+          0.015625000000000007,
+          0.0003452669830012439,
+          0.03125
+        ],
+        "log": [
+          -6.58489821531948,
+          -4.1588830833596715,
+          -7.971192576439371,
+          -3.4657359027997265
+        ],
+        "probabilities": [
+          0.02841625511768721,
+          0.3214932270342971,
+          0.007104063779421805,
+          0.6429864540685939
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 0.5,
+          "first_random_then_fixed": 0.5,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 7.0,
+        "expert_losses": {
+          "always_random": 9.5,
+          "first_random_then_fixed": 6.0,
+          "copycat_last_human": 11.5,
+          "beat_last_human": 5.0
+        },
+        "best_expert_loss": 5.0,
+        "regret_to_best_expert": 2.0
+      }
+    },
+    {
+      "round": 15,
+      "human_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "mwu_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "beat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.0013810679320049757,
+          0.015625000000000007,
+          0.0003452669830012439,
+          0.03125
+        ],
+        "log": [
+          -6.58489821531948,
+          -4.1588830833596715,
+          -7.971192576439371,
+          -3.4657359027997265
+        ],
+        "probabilities": [
+          0.02841625511768721,
+          0.3214932270342971,
+          0.007104063779421805,
+          0.6429864540685939
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.0009765625,
+          0.007812500000000002,
+          0.0001726334915006219,
+          0.022097086912079608
+        ],
+        "log": [
+          -6.931471805599453,
+          -4.852030263919617,
+          -8.664339756999317,
+          -3.8123094930796992
+        ],
+        "probabilities": [
+          0.03144239434725013,
+          0.2515391547780011,
+          0.00555828256492053,
+          0.7114601683098283
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 0.5,
+          "first_random_then_fixed": 1.0,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 7.5,
+        "expert_losses": {
+          "always_random": 10.0,
+          "first_random_then_fixed": 7.0,
+          "copycat_last_human": 12.5,
+          "beat_last_human": 5.5
+        },
+        "best_expert_loss": 5.5,
+        "regret_to_best_expert": 2.0
+      }
+    },
+    {
+      "round": 16,
+      "human_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "mwu_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "selected_expert": {
+        "index": 1,
+        "name": "first_random_then_fixed"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "beat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.0009765625,
+          0.007812500000000002,
+          0.0001726334915006219,
+          0.022097086912079608
+        ],
+        "log": [
+          -6.931471805599453,
+          -4.852030263919617,
+          -8.664339756999317,
+          -3.8123094930796992
+        ],
+        "probabilities": [
+          0.03144239434725013,
+          0.2515391547780011,
+          0.00555828256492053,
+          0.7114601683098283
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.0006905339660024878,
+          0.005524271728019904,
+          0.0001726334915006219,
+          0.01104854345603981
+        ],
+        "log": [
+          -7.278045395879426,
+          -5.19860385419959,
+          -8.664339756999317,
+          -4.505456673639644
+        ],
+        "probabilities": [
+          0.03960396039603959,
+          0.3168316831683168,
+          0.009900990099009896,
+          0.6336633663366337
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 0.5,
+          "first_random_then_fixed": 0.5,
+          "copycat_last_human": 0.0,
+          "beat_last_human": 1.0
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 8.0,
+        "expert_losses": {
+          "always_random": 10.5,
+          "first_random_then_fixed": 7.5,
+          "copycat_last_human": 12.5,
+          "beat_last_human": 6.5
+        },
+        "best_expert_loss": 6.5,
+        "regret_to_best_expert": 1.5
+      }
+    },
+    {
+      "round": 17,
+      "human_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "mwu_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "beat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.0006905339660024878,
+          0.005524271728019904,
+          0.0001726334915006219,
+          0.01104854345603981
+        ],
+        "log": [
+          -7.278045395879426,
+          -5.19860385419959,
+          -8.664339756999317,
+          -4.505456673639644
+        ],
+        "probabilities": [
+          0.03960396039603959,
+          0.3168316831683168,
+          0.009900990099009896,
+          0.6336633663366337
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.0006905339660024878,
+          0.005524271728019904,
+          0.0001726334915006219,
+          0.005524271728019904
+        ],
+        "log": [
+          -7.278045395879426,
+          -5.19860385419959,
+          -8.664339756999317,
+          -5.19860385419959
+        ],
+        "probabilities": [
+          0.05797101449275361,
+          0.463768115942029,
+          0.014492753623188399,
+          0.463768115942029
+        ]
+      },
+      "losses": {
+        "mwu": 1.0,
+        "experts": {
+          "always_random": 0.0,
+          "first_random_then_fixed": 0.0,
+          "copycat_last_human": 0.0,
+          "beat_last_human": 1.0
+        }
+      },
+      "result": "human_win",
+      "cumulative": {
+        "mwu_loss": 9.0,
+        "expert_losses": {
+          "always_random": 10.5,
+          "first_random_then_fixed": 7.5,
+          "copycat_last_human": 12.5,
+          "beat_last_human": 7.5
+        },
+        "best_expert_loss": 7.5,
+        "regret_to_best_expert": 1.5
+      }
+    },
+    {
+      "round": 18,
+      "human_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "mwu_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "selected_expert": {
+        "index": 1,
+        "name": "first_random_then_fixed"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "beat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.0006905339660024878,
+          0.005524271728019904,
+          0.0001726334915006219,
+          0.005524271728019904
+        ],
+        "log": [
+          -7.278045395879426,
+          -5.19860385419959,
+          -8.664339756999317,
+          -5.19860385419959
+        ],
+        "probabilities": [
+          0.05797101449275361,
+          0.463768115942029,
+          0.014492753623188399,
+          0.463768115942029
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.0006905339660024878,
+          0.0027621358640099515,
+          0.0001726334915006219,
+          0.0027621358640099515
+        ],
+        "log": [
+          -7.278045395879426,
+          -5.891751034759535,
+          -8.664339756999317,
+          -5.891751034759535
+        ],
+        "probabilities": [
+          0.10810810810810809,
+          0.43243243243243246,
+          0.027027027027027018,
+          0.43243243243243246
+        ]
+      },
+      "losses": {
+        "mwu": 1.0,
+        "experts": {
+          "always_random": 0.0,
+          "first_random_then_fixed": 1.0,
+          "copycat_last_human": 0.0,
+          "beat_last_human": 1.0
+        }
+      },
+      "result": "human_win",
+      "cumulative": {
+        "mwu_loss": 10.0,
+        "expert_losses": {
+          "always_random": 10.5,
+          "first_random_then_fixed": 8.5,
+          "copycat_last_human": 12.5,
+          "beat_last_human": 8.5
+        },
+        "best_expert_loss": 8.5,
+        "regret_to_best_expert": 1.5
+      }
+    },
+    {
+      "round": 19,
+      "human_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "mwu_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "beat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.0006905339660024878,
+          0.0027621358640099515,
+          0.0001726334915006219,
+          0.0027621358640099515
+        ],
+        "log": [
+          -7.278045395879426,
+          -5.891751034759535,
+          -8.664339756999317,
+          -5.891751034759535
+        ],
+        "probabilities": [
+          0.10810810810810809,
+          0.43243243243243246,
+          0.027027027027027018,
+          0.43243243243243246
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.0006905339660024878,
+          0.001953125,
+          0.0001726334915006219,
+          0.0013810679320049757
+        ],
+        "log": [
+          -7.278045395879426,
+          -6.238324625039508,
+          -8.664339756999317,
+          -6.58489821531948
+        ],
+        "probabilities": [
+          0.1645162440014868,
+          0.46532220699516796,
+          0.04112906100037169,
+          0.3290324880029736
+        ]
+      },
+      "losses": {
+        "mwu": 1.0,
+        "experts": {
+          "always_random": 0.0,
+          "first_random_then_fixed": 0.5,
+          "copycat_last_human": 0.0,
+          "beat_last_human": 1.0
+        }
+      },
+      "result": "human_win",
+      "cumulative": {
+        "mwu_loss": 11.0,
+        "expert_losses": {
+          "always_random": 10.5,
+          "first_random_then_fixed": 9.0,
+          "copycat_last_human": 12.5,
+          "beat_last_human": 9.5
+        },
+        "best_expert_loss": 9.0,
+        "regret_to_best_expert": 2.0
+      }
+    },
+    {
+      "round": 20,
+      "human_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "mwu_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "selected_expert": {
+        "index": 2,
+        "name": "copycat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "beat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.0006905339660024878,
+          0.001953125,
+          0.0001726334915006219,
+          0.0013810679320049757
+        ],
+        "log": [
+          -7.278045395879426,
+          -6.238324625039508,
+          -8.664339756999317,
+          -6.58489821531948
+        ],
+        "probabilities": [
+          0.1645162440014868,
+          0.46532220699516796,
+          0.04112906100037169,
+          0.3290324880029736
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.0006905339660024878,
+          0.0009765625,
+          8.631674575031096e-05,
+          0.0009765625
+        ],
+        "log": [
+          -7.278045395879426,
+          -6.931471805599453,
+          -9.357486937559262,
+          -6.931471805599453
+        ],
+        "probabilities": [
+          0.25294509508992147,
+          0.35771838401191913,
+          0.03161813688624018,
+          0.35771838401191913
+        ]
+      },
+      "losses": {
+        "mwu": 1.0,
+        "experts": {
+          "always_random": 0.0,
+          "first_random_then_fixed": 1.0,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "human_win",
+      "cumulative": {
+        "mwu_loss": 12.0,
+        "expert_losses": {
+          "always_random": 10.5,
+          "first_random_then_fixed": 10.0,
+          "copycat_last_human": 13.5,
+          "beat_last_human": 10.0
+        },
+        "best_expert_loss": 10.0,
+        "regret_to_best_expert": 2.0
+      }
+    },
+    {
+      "round": 21,
+      "human_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "mwu_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "beat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.0006905339660024878,
+          0.0009765625,
+          8.631674575031096e-05,
+          0.0009765625
+        ],
+        "log": [
+          -7.278045395879426,
+          -6.931471805599453,
+          -9.357486937559262,
+          -6.931471805599453
+        ],
+        "probabilities": [
+          0.25294509508992147,
+          0.35771838401191913,
+          0.03161813688624018,
+          0.35771838401191913
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.00048828124999999995,
+          0.0009765625,
+          4.315837287515547e-05,
+          0.0006905339660024878
+        ],
+        "log": [
+          -7.6246189861593985,
+          -6.931471805599453,
+          -10.050634118119207,
+          -7.278045395879426
+        ],
+        "probabilities": [
+          0.22209380708836507,
+          0.4441876141767302,
+          0.019630504631464978,
+          0.31408807410343975
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 0.5,
+          "first_random_then_fixed": 0.0,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 12.5,
+        "expert_losses": {
+          "always_random": 11.0,
+          "first_random_then_fixed": 10.0,
+          "copycat_last_human": 14.5,
+          "beat_last_human": 10.5
+        },
+        "best_expert_loss": 10.0,
+        "regret_to_best_expert": 2.5
+      }
+    },
+    {
+      "round": 22,
+      "human_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "mwu_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "selected_expert": {
+        "index": 1,
+        "name": "first_random_then_fixed"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "beat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.00048828124999999995,
+          0.0009765625,
+          4.315837287515547e-05,
+          0.0006905339660024878
+        ],
+        "log": [
+          -7.6246189861593985,
+          -6.931471805599453,
+          -10.050634118119207,
+          -7.278045395879426
+        ],
+        "probabilities": [
+          0.22209380708836507,
+          0.4441876141767302,
+          0.019630504631464978,
+          0.31408807410343975
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.00024414062500000016,
+          0.0006905339660024878,
+          2.1579186437577736e-05,
+          0.00048828124999999995
+        ],
+        "log": [
+          -8.317766166719343,
+          -7.278045395879426,
+          -10.743781298679153,
+          -7.6246189861593985
+        ],
+        "probabilities": [
+          0.1690098338651256,
+          0.4780319984529682,
+          0.014938499951655249,
+          0.338019667730251
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 1.0,
+          "first_random_then_fixed": 0.5,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 13.0,
+        "expert_losses": {
+          "always_random": 12.0,
+          "first_random_then_fixed": 10.5,
+          "copycat_last_human": 15.5,
+          "beat_last_human": 11.0
+        },
+        "best_expert_loss": 10.5,
+        "regret_to_best_expert": 2.5
+      }
+    },
+    {
+      "round": 23,
+      "human_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "mwu_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "beat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.00024414062500000016,
+          0.0006905339660024878,
+          2.1579186437577736e-05,
+          0.00048828124999999995
+        ],
+        "log": [
+          -8.317766166719343,
+          -7.278045395879426,
+          -10.743781298679153,
+          -7.6246189861593985
+        ],
+        "probabilities": [
+          0.1690098338651256,
+          0.4780319984529682,
+          0.014938499951655249,
+          0.338019667730251
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          0.00012207031250000008,
+          0.0003452669830012439,
+          1.0789593218788866e-05,
+          0.0003452669830012439
+        ],
+        "log": [
+          -9.010913347279288,
+          -7.971192576439371,
+          -11.436928479239098,
+          -7.971192576439371
+        ],
+        "probabilities": [
+          0.1482526366692726,
+          0.419321778870512,
+          0.013103805589703494,
+          0.419321778870512
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 1.0,
+          "first_random_then_fixed": 1.0,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 13.5,
+        "expert_losses": {
+          "always_random": 13.0,
+          "first_random_then_fixed": 11.5,
+          "copycat_last_human": 16.5,
+          "beat_last_human": 11.5
+        },
+        "best_expert_loss": 11.5,
+        "regret_to_best_expert": 2.0
+      }
+    },
+    {
+      "round": 24,
+      "human_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "mwu_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "beat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        }
+      },
+      "weights_before": {
+        "raw": [
+          0.00012207031250000008,
+          0.0003452669830012439,
+          1.0789593218788866e-05,
+          0.0003452669830012439
+        ],
+        "log": [
+          -9.010913347279288,
+          -7.971192576439371,
+          -11.436928479239098,
+          -7.971192576439371
+        ],
+        "probabilities": [
+          0.1482526366692726,
+          0.419321778870512,
+          0.013103805589703494,
+          0.419321778870512
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          6.103515625000003e-05,
+          0.0003452669830012439,
+          5.394796609394432e-06,
+          0.00024414062500000016
+        ],
+        "log": [
+          -9.704060527839234,
+          -7.971192576439371,
+          -12.130075659799044,
+          -8.317766166719343
+        ],
+        "probabilities": [
+          0.09306444139903361,
+          0.5264519808047575,
+          0.008225812200074331,
+          0.37225776559613455
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 1.0,
+          "first_random_then_fixed": 0.0,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 14.0,
+        "expert_losses": {
+          "always_random": 14.0,
+          "first_random_then_fixed": 11.5,
+          "copycat_last_human": 17.5,
+          "beat_last_human": 12.0
+        },
+        "best_expert_loss": 11.5,
+        "regret_to_best_expert": 2.5
+      }
+    },
+    {
+      "round": 25,
+      "human_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "mwu_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "beat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        }
+      },
+      "weights_before": {
+        "raw": [
+          6.103515625000003e-05,
+          0.0003452669830012439,
+          5.394796609394432e-06,
+          0.00024414062500000016
+        ],
+        "log": [
+          -9.704060527839234,
+          -7.971192576439371,
+          -12.130075659799044,
+          -8.317766166719343
+        ],
+        "probabilities": [
+          0.09306444139903361,
+          0.5264519808047575,
+          0.008225812200074331,
+          0.37225776559613455
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          3.0517578125000014e-05,
+          0.0001726334915006219,
+          5.394796609394432e-06,
+          0.00012207031250000008
+        ],
+        "log": [
+          -10.39720770839918,
+          -8.664339756999317,
+          -12.130075659799044,
+          -9.010913347279288
+        ],
+        "probabilities": [
+          0.09230515651643098,
+          0.5221568168900316,
+          0.01631740052781348,
+          0.36922062606572403
+        ]
+      },
+      "losses": {
+        "mwu": 1.0,
+        "experts": {
+          "always_random": 1.0,
+          "first_random_then_fixed": 1.0,
+          "copycat_last_human": 0.0,
+          "beat_last_human": 1.0
+        }
+      },
+      "result": "human_win",
+      "cumulative": {
+        "mwu_loss": 15.0,
+        "expert_losses": {
+          "always_random": 15.0,
+          "first_random_then_fixed": 12.5,
+          "copycat_last_human": 17.5,
+          "beat_last_human": 13.0
+        },
+        "best_expert_loss": 12.5,
+        "regret_to_best_expert": 2.5
+      }
+    },
+    {
+      "round": 26,
+      "human_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "mwu_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "selected_expert": {
+        "index": 1,
+        "name": "first_random_then_fixed"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "beat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        }
+      },
+      "weights_before": {
+        "raw": [
+          3.0517578125000014e-05,
+          0.0001726334915006219,
+          5.394796609394432e-06,
+          0.00012207031250000008
+        ],
+        "log": [
+          -10.39720770839918,
+          -8.664339756999317,
+          -12.130075659799044,
+          -9.010913347279288
+        ],
+        "probabilities": [
+          0.09230515651643098,
+          0.5221568168900316,
+          0.01631740052781348,
+          0.36922062606572403
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          1.5258789062500007e-05,
+          0.00012207031250000008,
+          5.394796609394432e-06,
+          6.103515625000003e-05
+        ],
+        "log": [
+          -11.090354888959125,
+          -9.010913347279288,
+          -12.130075659799044,
+          -9.704060527839234
+        ],
+        "probabilities": [
+          0.07488643440063197,
+          0.5990914752050559,
+          0.026476352791784178,
+          0.2995457376025279
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 1.0,
+          "first_random_then_fixed": 0.5,
+          "copycat_last_human": 0.0,
+          "beat_last_human": 1.0
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 15.5,
+        "expert_losses": {
+          "always_random": 16.0,
+          "first_random_then_fixed": 13.0,
+          "copycat_last_human": 17.5,
+          "beat_last_human": 14.0
+        },
+        "best_expert_loss": 13.0,
+        "regret_to_best_expert": 2.5
+      }
+    },
+    {
+      "round": 27,
+      "human_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "mwu_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "selected_expert": {
+        "index": 1,
+        "name": "first_random_then_fixed"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "beat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        }
+      },
+      "weights_before": {
+        "raw": [
+          1.5258789062500007e-05,
+          0.00012207031250000008,
+          5.394796609394432e-06,
+          6.103515625000003e-05
+        ],
+        "log": [
+          -11.090354888959125,
+          -9.010913347279288,
+          -12.130075659799044,
+          -9.704060527839234
+        ],
+        "probabilities": [
+          0.07488643440063197,
+          0.5990914752050559,
+          0.026476352791784178,
+          0.2995457376025279
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          7.629394531250002e-06,
+          6.103515625000003e-05,
+          2.697398304697216e-06,
+          4.3158372875155546e-05
+        ],
+        "log": [
+          -11.78350206951907,
+          -9.704060527839234,
+          -12.823222840358989,
+          -10.050634118119206
+        ],
+        "probabilities": [
+          0.06662044256076534,
+          0.5329635404861228,
+          0.023553883350183002,
+          0.37686213360292886
+        ]
+      },
+      "losses": {
+        "mwu": 1.0,
+        "experts": {
+          "always_random": 1.0,
+          "first_random_then_fixed": 1.0,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "human_win",
+      "cumulative": {
+        "mwu_loss": 16.5,
+        "expert_losses": {
+          "always_random": 17.0,
+          "first_random_then_fixed": 14.0,
+          "copycat_last_human": 18.5,
+          "beat_last_human": 14.5
+        },
+        "best_expert_loss": 14.0,
+        "regret_to_best_expert": 2.5
+      }
+    },
+    {
+      "round": 28,
+      "human_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "mwu_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "selected_expert": {
+        "index": 0,
+        "name": "always_random"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "beat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        }
+      },
+      "weights_before": {
+        "raw": [
+          7.629394531250002e-06,
+          6.103515625000003e-05,
+          2.697398304697216e-06,
+          4.3158372875155546e-05
+        ],
+        "log": [
+          -11.78350206951907,
+          -9.704060527839234,
+          -12.823222840358989,
+          -10.050634118119206
+        ],
+        "probabilities": [
+          0.06662044256076534,
+          0.5329635404861228,
+          0.023553883350183002,
+          0.37686213360292886
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          7.629394531250002e-06,
+          3.0517578125000014e-05,
+          1.9073486328125e-06,
+          4.3158372875155546e-05
+        ],
+        "log": [
+          -11.78350206951907,
+          -10.39720770839918,
+          -13.16979643063896,
+          -10.050634118119206
+        ],
+        "probabilities": [
+          0.09168546467433915,
+          0.36674185869735665,
+          0.02292136616858478,
+          0.5186513104597195
+        ]
+      },
+      "losses": {
+        "mwu": 0.0,
+        "experts": {
+          "always_random": 0.0,
+          "first_random_then_fixed": 1.0,
+          "copycat_last_human": 0.5,
+          "beat_last_human": 0.0
+        }
+      },
+      "result": "mwu_win",
+      "cumulative": {
+        "mwu_loss": 16.5,
+        "expert_losses": {
+          "always_random": 17.0,
+          "first_random_then_fixed": 15.0,
+          "copycat_last_human": 19.0,
+          "beat_last_human": 14.5
+        },
+        "best_expert_loss": 14.5,
+        "regret_to_best_expert": 2.0
+      }
+    },
+    {
+      "round": 29,
+      "human_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "mwu_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "selected_expert": {
+        "index": 1,
+        "name": "first_random_then_fixed"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "beat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        }
+      },
+      "weights_before": {
+        "raw": [
+          7.629394531250002e-06,
+          3.0517578125000014e-05,
+          1.9073486328125e-06,
+          4.3158372875155546e-05
+        ],
+        "log": [
+          -11.78350206951907,
+          -10.39720770839918,
+          -13.16979643063896,
+          -10.050634118119206
+        ],
+        "probabilities": [
+          0.09168546467433915,
+          0.36674185869735665,
+          0.02292136616858478,
+          0.5186513104597195
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          5.394796609394442e-06,
+          1.5258789062500007e-05,
+          1.3486991523486104e-06,
+          4.3158372875155546e-05
+        ],
+        "log": [
+          -12.130075659799042,
+          -11.090354888959125,
+          -13.516370020918933,
+          -10.050634118119206
+        ],
+        "probabilities": [
+          0.08279223690899351,
+          0.23417180859180975,
+          0.020698059227248374,
+          0.6623378952719483
+        ]
+      },
+      "losses": {
+        "mwu": 1.0,
+        "experts": {
+          "always_random": 0.5,
+          "first_random_then_fixed": 1.0,
+          "copycat_last_human": 0.5,
+          "beat_last_human": 0.0
+        }
+      },
+      "result": "human_win",
+      "cumulative": {
+        "mwu_loss": 17.5,
+        "expert_losses": {
+          "always_random": 17.5,
+          "first_random_then_fixed": 16.0,
+          "copycat_last_human": 19.5,
+          "beat_last_human": 14.5
+        },
+        "best_expert_loss": 14.5,
+        "regret_to_best_expert": 3.0
+      }
+    },
+    {
+      "round": 30,
+      "human_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "mwu_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "beat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        }
+      },
+      "weights_before": {
+        "raw": [
+          5.394796609394442e-06,
+          1.5258789062500007e-05,
+          1.3486991523486104e-06,
+          4.3158372875155546e-05
+        ],
+        "log": [
+          -12.130075659799042,
+          -11.090354888959125,
+          -13.516370020918933,
+          -10.050634118119206
+        ],
+        "probabilities": [
+          0.08279223690899351,
+          0.23417180859180975,
+          0.020698059227248374,
+          0.6623378952719483
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          2.6973983046972208e-06,
+          1.5258789062500007e-05,
+          6.743495761743051e-07,
+          3.051757812500007e-05
+        ],
+        "log": [
+          -12.823222840358987,
+          -11.090354888959125,
+          -14.209517201478878,
+          -10.397207708399177
+        ],
+        "probabilities": [
+          0.05488304690718615,
+          0.3104653971220054,
+          0.013720761726796536,
+          0.620930794244012
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 1.0,
+          "first_random_then_fixed": 0.0,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 18.0,
+        "expert_losses": {
+          "always_random": 18.5,
+          "first_random_then_fixed": 16.0,
+          "copycat_last_human": 20.5,
+          "beat_last_human": 15.0
+        },
+        "best_expert_loss": 15.0,
+        "regret_to_best_expert": 3.0
+      }
+    },
+    {
+      "round": 31,
+      "human_move": {
+        "name": "SCISSORS",
+        "value": 1
+      },
+      "mwu_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "beat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        }
+      },
+      "weights_before": {
+        "raw": [
+          2.6973983046972208e-06,
+          1.5258789062500007e-05,
+          6.743495761743051e-07,
+          3.051757812500007e-05
+        ],
+        "log": [
+          -12.823222840358987,
+          -11.090354888959125,
+          -14.209517201478878,
+          -10.397207708399177
+        ],
+        "probabilities": [
+          0.05488304690718615,
+          0.3104653971220054,
+          0.013720761726796536,
+          0.620930794244012
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          1.9073486328125034e-06,
+          1.5258789062500007e-05,
+          4.768371582031258e-07,
+          3.051757812500007e-05
+        ],
+        "log": [
+          -13.169796430638959,
+          -11.090354888959125,
+          -14.55609079175885,
+          -10.397207708399177
+        ],
+        "probabilities": [
+          0.03960396039603961,
+          0.3168316831683164,
+          0.009900990099009901,
+          0.633663366336634
+        ]
+      },
+      "losses": {
+        "mwu": 0.0,
+        "experts": {
+          "always_random": 0.5,
+          "first_random_then_fixed": 0.0,
+          "copycat_last_human": 0.5,
+          "beat_last_human": 0.0
+        }
+      },
+      "result": "mwu_win",
+      "cumulative": {
+        "mwu_loss": 18.0,
+        "expert_losses": {
+          "always_random": 19.0,
+          "first_random_then_fixed": 16.0,
+          "copycat_last_human": 21.0,
+          "beat_last_human": 15.0
+        },
+        "best_expert_loss": 15.0,
+        "regret_to_best_expert": 3.0
+      }
+    },
+    {
+      "round": 32,
+      "human_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "mwu_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "SCISSORS",
+          "value": 1
+        },
+        "beat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        }
+      },
+      "weights_before": {
+        "raw": [
+          1.9073486328125034e-06,
+          1.5258789062500007e-05,
+          4.768371582031258e-07,
+          3.051757812500007e-05
+        ],
+        "log": [
+          -13.169796430638959,
+          -11.090354888959125,
+          -14.55609079175885,
+          -10.397207708399177
+        ],
+        "probabilities": [
+          0.03960396039603961,
+          0.3168316831683164,
+          0.009900990099009901,
+          0.633663366336634
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          1.3486991523486127e-06,
+          1.0789593218788885e-05,
+          2.3841857910156287e-07,
+          2.157918643757781e-05
+        ],
+        "log": [
+          -13.51637002091893,
+          -11.436928479239096,
+          -15.249237972318795,
+          -10.74378129867915
+        ],
+        "probabilities": [
+          0.03971914324468763,
+          0.31775314595750054,
+          0.00702141888280961,
+          0.6355062919150023
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 0.5,
+          "first_random_then_fixed": 0.5,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 18.5,
+        "expert_losses": {
+          "always_random": 19.5,
+          "first_random_then_fixed": 16.5,
+          "copycat_last_human": 22.0,
+          "beat_last_human": 15.5
+        },
+        "best_expert_loss": 15.5,
+        "regret_to_best_expert": 3.0
+      }
+    },
+    {
+      "round": 33,
+      "human_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "mwu_move": {
+        "name": "ROCK",
+        "value": 0
+      },
+      "selected_expert": {
+        "index": 1,
+        "name": "first_random_then_fixed"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "beat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        }
+      },
+      "weights_before": {
+        "raw": [
+          1.3486991523486127e-06,
+          1.0789593218788885e-05,
+          2.3841857910156287e-07,
+          2.157918643757781e-05
+        ],
+        "log": [
+          -13.51637002091893,
+          -11.436928479239096,
+          -15.249237972318795,
+          -10.74378129867915
+        ],
+        "probabilities": [
+          0.03971914324468763,
+          0.31775314595750054,
+          0.00702141888280961,
+          0.6355062919150023
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          1.3486991523486127e-06,
+          7.629394531250015e-06,
+          1.6858739404357654e-07,
+          2.157918643757781e-05
+        ],
+        "log": [
+          -13.51637002091893,
+          -11.783502069519068,
+          -15.595811562598767,
+          -10.74378129867915
+        ],
+        "probabilities": [
+          0.04389458334026001,
+          0.2483052602980471,
+          0.0054868229175324985,
+          0.7023133334441604
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 0.0,
+          "first_random_then_fixed": 0.5,
+          "copycat_last_human": 0.5,
+          "beat_last_human": 0.0
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 19.0,
+        "expert_losses": {
+          "always_random": 19.5,
+          "first_random_then_fixed": 17.0,
+          "copycat_last_human": 22.5,
+          "beat_last_human": 15.5
+        },
+        "best_expert_loss": 15.5,
+        "regret_to_best_expert": 3.5
+      }
+    },
+    {
+      "round": 34,
+      "human_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "mwu_move": {
+        "name": "PAPER",
+        "value": 2
+      },
+      "selected_expert": {
+        "index": 3,
+        "name": "beat_last_human"
+      },
+      "expert_moves": {
+        "always_random": {
+          "name": "PAPER",
+          "value": 2
+        },
+        "first_random_then_fixed": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "copycat_last_human": {
+          "name": "ROCK",
+          "value": 0
+        },
+        "beat_last_human": {
+          "name": "PAPER",
+          "value": 2
+        }
+      },
+      "weights_before": {
+        "raw": [
+          1.3486991523486127e-06,
+          7.629394531250015e-06,
+          1.6858739404357654e-07,
+          2.157918643757781e-05
+        ],
+        "log": [
+          -13.51637002091893,
+          -11.783502069519068,
+          -15.595811562598767,
+          -10.74378129867915
+        ],
+        "probabilities": [
+          0.04389458334026001,
+          0.2483052602980471,
+          0.0054868229175324985,
+          0.7023133334441604
+        ]
+      },
+      "weights_after": {
+        "raw": [
+          9.536743164062534e-07,
+          3.814697265625008e-06,
+          8.429369702178827e-08,
+          1.525878906250006e-05
+        ],
+        "log": [
+          -13.862943611198903,
+          -12.476649250079014,
+          -16.288958743158712,
+          -11.090354888959121
+        ],
+        "probabilities": [
+          0.0474194605825113,
+          0.18967784233004487,
+          0.004191327767262737,
+          0.758711369320181
+        ]
+      },
+      "losses": {
+        "mwu": 0.5,
+        "experts": {
+          "always_random": 0.5,
+          "first_random_then_fixed": 1.0,
+          "copycat_last_human": 1.0,
+          "beat_last_human": 0.5
+        }
+      },
+      "result": "draw",
+      "cumulative": {
+        "mwu_loss": 19.5,
+        "expert_losses": {
+          "always_random": 20.0,
+          "first_random_then_fixed": 18.0,
+          "copycat_last_human": 23.5,
+          "beat_last_human": 16.0
+        },
+        "best_expert_loss": 16.0,
+        "regret_to_best_expert": 3.5
+      }
+    }
+  ],
+  "summary": {
+    "total_rounds": 34,
+    "mwu_wins": 4,
+    "human_wins": 9,
+    "draws": 21,
+    "cumulative_mwu_loss": 19.5,
+    "cumulative_expert_losses": {
+      "always_random": 20.0,
+      "first_random_then_fixed": 18.0,
+      "copycat_last_human": 23.5,
+      "beat_last_human": 16.0
+    }
+  }
+}

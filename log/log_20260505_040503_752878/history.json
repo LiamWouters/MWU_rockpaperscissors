@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "game": "Rock-Paper-Scissors",
+    "mode": "auto",
+    "algorithm": "mwu_random",
+    "input_file": "C:\\Users\\ThinkPad\\Documents\\Study\\Master\\Sem2\\fundamental-alg\\mwu_project\\RPS_input.txt",
+    "log_dir": "C:\\Users\\ThinkPad\\Documents\\Study\\Master\\Sem2\\fundamental-alg\\mwu_project\\log\\log_20260505_040503_752878",
+    "alpha": 0.5,
+    "seed": 42,
+    "experts": [
+      "random"
+    ],
+    "total_input_moves": 0,
+    "parse_errors": [],
+    "created_at": "2026-05-05T04:05:03"
+  },
+  "rounds": [],
+  "summary": {
+    "total_rounds": 0,
+    "mwu_wins": 0,
+    "human_wins": 0,
+    "draws": 0,
+    "cumulative_mwu_loss": 0.0,
+    "cumulative_expert_losses": {
+      "random": 0.0
+    }
+  }
+}

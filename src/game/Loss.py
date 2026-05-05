@@ -51,4 +51,13 @@ class RPSLoss(LossComputer):
         Arguments:
             - move: The move made by the player or expert
         """
-        pass
+        move = MOVES(move)
+        outcome = MOVES(outcome)
+
+        if move == outcome:
+            return 0.5
+
+        # With the current enum values:
+        # ROCK=0 beats SCISSORS=1, SCISSORS=1 beats PAPER=2,
+        # and PAPER=2 beats ROCK=0.
+        return 0.0 if (move - outcome) % 3 == 2 else 1.0

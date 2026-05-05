@@ -17,7 +17,7 @@ class GameRunner:
         # Initialize screens
         self._main_menu = MainMenu(self.screen, self.game)
         self._generate = GenerateInput(self.screen)
-        self._play_auto_rps = PlayAutoRPS(self.screen)
+        self._play_auto_rps = PlayAutoRPS(self.screen, self.experts)
         self._play_auto_cf = PlayAutoCF(self.screen)
         self._play_manual_rps = PlayManualRPS(self.screen)
         
