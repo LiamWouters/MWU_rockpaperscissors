@@ -5,6 +5,9 @@ from strategies import (
     CopycatLastHumanExpert,
     FirstRandomThenFixedExpert,
     RandomExpert,
+    ConstantGuessExpert,
+    GuessLastOutcomeExpert,
+    FrequencyGuessExpert
 )
 
 if __name__ == "__main__":
@@ -18,6 +21,10 @@ if __name__ == "__main__":
         },
         expertsCF={
             "always_random": RandomExpert(COINFACE, seed=0),
+            "constant_guess_heads": ConstantGuessExpert(COINFACE.HEADS),
+            "constant_guess_tails": ConstantGuessExpert(COINFACE.TAILS),
+            "guess_last_outcome": GuessLastOutcomeExpert(seed=1),
+            "frequency_based_guess": FrequencyGuessExpert(seed=2),
         }
     )
     print("Finished game!")

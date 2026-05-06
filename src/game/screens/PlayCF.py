@@ -5,6 +5,10 @@ from algorithms import WeightedMajorityRegretTracker, MWURegretTracker
 from strategies import WeightedMajorityPlayer, MWURandomPlayer
 from .GameScreen import *
 
+# TODO: GRAPH OF WEIGHTS
+# TODO: GRAPH OF REGRET
+# TODO: GRAPH OF ??
+
 CF_HISTORY_FILE_PATH = os.path.join(os.getcwd(), "CF_history.txt")
 CF_SUMMARY_FILE_PATH = os.path.join(os.getcwd(), "CF_history_summary.txt")
 
@@ -155,7 +159,7 @@ class PlayCF(GameScreen):
         self.total_rolls += 1
         self.last_move_time = get_time_milliseconds()
         
-        self.elements["LATEST_ROLL"].updateText(f"Latest Roll: {self.latest_roll}")
+        self.elements["LATEST_ROLL"].updateText(f"Latest Roll: {latest_roll_text}")
         self.elements["TOTAL_ROLLS"].updateText(f"Total Rolls: {self.total_rolls}")
         
         ## Update learners

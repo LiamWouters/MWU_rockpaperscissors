@@ -9,7 +9,7 @@ class RandomExpert(AbstractStrategy):
         self._rng = random.Random(seed)  # For reproducibility
 
     def play(self, gameHistory: list):
-        return self._rng.choice(list(MOVES))
+        return self._rng.choice(list(self.options))
 
     def update(self, outcome: MOVES):
         pass
