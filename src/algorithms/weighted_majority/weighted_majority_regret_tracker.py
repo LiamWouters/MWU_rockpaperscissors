@@ -20,7 +20,9 @@ class WeightedMajorityRegretTracker(RegretTracker):
         max_t : int
             Maximum time horizon.
         """
-        super().__init__(n_experts=n_experts, alpha=alpha, max_t=max_t)
+        super().__init__(
+            n_experts=n_experts, alpha=alpha, max_t=max_t, use_expected_loss=False
+        )
 
     def _compute_bound(self, best_expert_loss):
         return (2 * np.log(self._n) / self._alpha) + 2 * (

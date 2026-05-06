@@ -20,7 +20,9 @@ class MWURegretTracker(RegretTracker):
         max_t : int
             Maximum time horizon.
         """
-        super().__init__(n_experts=n_experts, alpha=alpha, max_t=max_t)
+        super().__init__(
+            n_experts=n_experts, alpha=alpha, max_t=max_t, use_expected_loss=True
+        )
 
     def _compute_bound(self, best_expert_loss):
         return (np.log(self._n) / self._alpha) + (1 + self._alpha) * best_expert_loss

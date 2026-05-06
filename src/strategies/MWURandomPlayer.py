@@ -42,11 +42,13 @@ class MWURandomPlayer(AbstractStrategy):
         self._last_expert_moves_int = None
         self._last_prediction_int = None
         self._last_expert_sampled_int = None
+        self._last_expert_probabilities = None
 
     def play(self) -> MOVES:
         """
         Samples a move using MWU-weighted random expert selection.
         """
+        self._last_expert_probabilities = self._mwu.probabilities
         expert_moves = [e.play() for e in self._experts]
 
         expert_moves_int = np.fromiter(
@@ -73,7 +75,6 @@ class MWURandomPlayer(AbstractStrategy):
         Updates MWU weights and (optionally) regret tracker.
         Must be called after play().
         """
-
         if self._last_expert_moves_int is None:
             raise RuntimeError("update() called before play()")
 
@@ -81,10 +82,11 @@ class MWURandomPlayer(AbstractStrategy):
             self._last_expert_moves_int,
             outcome,
         )
+        expected_learner_loss = np.dot(self._last_expert_probabilities, expert_losses)
 
         self._mwu.update(expert_losses)
 
-        learner_loss = self._loss_computer.compute_loss(
+        real_learner_loss = self._loss_computer.compute_loss(
             self._last_prediction_int,
             outcome,
         )
@@ -92,12 +94,14 @@ class MWURandomPlayer(AbstractStrategy):
         if self._regret_tracker is not None:
             self._regret_tracker.update(
                 loss_vector=expert_losses,
-                learner_loss=learner_loss,
+                learner_loss=real_learner_loss,
+                expected_learner_loss=expected_learner_loss,
             )
 
         self._last_expert_moves_int = None
         self._last_prediction_int = None
         self._last_expert_sampled_int = None
+        self._last_expert_probabilities = None
 
         for e in self._experts:
             e.update(outcome)
