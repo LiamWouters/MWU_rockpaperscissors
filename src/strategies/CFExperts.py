@@ -13,7 +13,7 @@ class ConstantGuessExpert(AbstractStrategy):
         super().__init__(COINFACE)
         self.always_guess = always_guess
 
-    def play(self, gameHistory: list) -> COINFACE:
+    def play(self) -> COINFACE:
         return self.always_guess
 
     def update(self, outcome: COINFACE):
@@ -29,7 +29,7 @@ class GuessLastOutcomeExpert(AbstractStrategy):
         self._rng = random.Random(seed)
         self.last_outcome = self._rng.choice(list(self.options))
         
-    def play(self, gameHistory: list) -> COINFACE:
+    def play(self) -> COINFACE:
         return self.last_outcome
 
     def update(self, outcome: COINFACE):
@@ -46,7 +46,7 @@ class FrequencyGuessExpert(AbstractStrategy):
         self.heads_count = 0
         self.tails_count = 0
         
-    def play(self, gameHistory: list) -> COINFACE:
+    def play(self) -> COINFACE:
         if self.heads_count == 0 and self.tails_count == 0:
             return self._rng.choice(list(self.options))
         total = self.heads_count + self.tails_count

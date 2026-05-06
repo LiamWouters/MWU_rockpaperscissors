@@ -7,7 +7,9 @@ from .GameScreen import *
 
 # TODO: GRAPH OF WEIGHTS
 # TODO: GRAPH OF REGRET
-# TODO: GRAPH OF ??
+# TODO: GRAPH OF cumulative losses, bound on player cumulative losses
+
+# 1 graph, toggle parts of it
 
 CF_HISTORY_FILE_PATH = os.path.join(os.getcwd(), "CF_history.txt")
 CF_SUMMARY_FILE_PATH = os.path.join(os.getcwd(), "CF_history_summary.txt")
@@ -89,22 +91,21 @@ class PlayCF(GameScreen):
             pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 36/100),
             font=get_font(16),
             slider_size=(35,20),
-            option1text="Auto Play",
-            show_bounding_box=True
+            option1text="Auto Play"
         )
         self.elements["ROLL_BUTTON"] = Button(
-            pos=(self.screen.get_width() * 25/100, self.screen.get_height() * 50/100),
+            pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 50/100),
             font=get_font(35),
             text="FLIP COIN",
             show_bounding_box=True
         )
         self.elements["LATEST_ROLL"] = TextLabel(
-            pos=(self.screen.get_width() * 25/100, self.screen.get_height() * 55/100),
+            pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 55/100),
             font=get_font(18),
             text="Latest Roll:",
         )
         self.elements["TOTAL_ROLLS"] = TextLabel(
-            pos=(self.screen.get_width() * 25/100, self.screen.get_height() * 59/100),
+            pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 59/100),
             font=get_font(16),
             text=f"Total Rolls:",
         )
@@ -136,7 +137,7 @@ class PlayCF(GameScreen):
                     self.elements["AUTO_INTERVAL_INPUT"].toggleSelected()
                 elif self.elements["AUTO_TOGGLE"].is_hovered():
                     self.elements["AUTO_TOGGLE"].switch()
-                    self.auto_move = self.elements["AUTO_TOGGLE"].state
+                    self._set_auto(self.elements["AUTO_TOGGLE"].state)
                 elif self.elements["ROLL_BUTTON"].is_hovered():
                     self._roll_coin()
                 
@@ -151,8 +152,17 @@ class PlayCF(GameScreen):
     
     def _set_interval(self, value):
         self.interval = value
-        
+    
+    def _set_auto(self, value):
+        if (self.elements["AUTO_TOGGLE"].state != value):
+            self.elements["AUTO_TOGGLE"].switch()
+        self.auto_move = value
+    
     def _roll_coin(self):
+        if self.total_rolls > self.MWU.regret_tracker._max_t:
+            self._set_auto(False)
+            return
+        
         normalized_heads_chance = self.heads_chance/100
         self.latest_roll = random.choices([face for face in COINFACE], weights=(1-normalized_heads_chance, normalized_heads_chance))[0]
         latest_roll_text = "HEADS" if self.latest_roll == COINFACE.HEADS else "TAILS"
@@ -163,7 +173,7 @@ class PlayCF(GameScreen):
         self.elements["TOTAL_ROLLS"].updateText(f"Total Rolls: {self.total_rolls}")
         
         ## Update learners
-        mwu_guess = self.MWU.play([])   # TODO: give game history?
+        mwu_guess = self.MWU.play()
         self.MWU.update(self.latest_roll)
         print(f"mwu_guess: {mwu_guess}, was: {self.latest_roll} ({latest_roll_text})")
         
@@ -183,7 +193,7 @@ class PlayCF(GameScreen):
         heads_count = 0
         tails_count = 0
         lastMoves = []
-        limit = 10
+        limit = 30
         with open(CF_HISTORY_FILE_PATH, 'r') as f:
             for line in f:
                 move = line.strip().replace(',','')

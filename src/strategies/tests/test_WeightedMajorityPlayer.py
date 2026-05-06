@@ -43,7 +43,7 @@ def test_weighted_majority_player_coin_game():
     )
 
     for t in range(T):
-        move = player.play([])
+        move = player.play()
         if t >= 1:
             assert move == COINFACE.HEADS
         player.update(COINFACE.HEADS)

@@ -10,10 +10,10 @@ from strategies import (
 def test_first_random_then_fixed_repeats_first_move():
     expert = FirstRandomThenFixedExpert(seed=10)
 
-    first = expert.play([])
-    second = expert.play([])
+    first = expert.play()
+    second = expert.play()
     expert.update(MOVES.PAPER)
-    third = expert.play([])
+    third = expert.play()
 
     assert first in list(MOVES)
     assert second == first
@@ -23,11 +23,11 @@ def test_first_random_then_fixed_repeats_first_move():
 def test_copycat_opens_random_then_copies_last_human_move():
     expert = CopycatLastHumanExpert(seed=20)
 
-    opening = expert.play([])
+    opening = expert.play()
     expert.update(MOVES.ROCK)
-    second = expert.play([])
+    second = expert.play()
     expert.update(MOVES.SCISSORS)
-    third = expert.play([])
+    third = expert.play()
 
     assert opening in list(MOVES)
     assert second == MOVES.ROCK
@@ -37,11 +37,11 @@ def test_copycat_opens_random_then_copies_last_human_move():
 def test_beat_last_human_plays_counter_move():
     expert = BeatLastHumanExpert(seed=30)
 
-    opening = expert.play([])
+    opening = expert.play()
     expert.update(MOVES.ROCK)
-    second = expert.play([])
+    second = expert.play()
     expert.update(MOVES.PAPER)
-    third = expert.play([])
+    third = expert.play()
 
     assert opening in list(MOVES)
     assert second == MOVES.PAPER

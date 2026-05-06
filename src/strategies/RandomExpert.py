@@ -8,7 +8,7 @@ class RandomExpert(AbstractStrategy):
         super().__init__(options)
         self._rng = random.Random(seed)  # For reproducibility
 
-    def play(self, gameHistory: list):
+    def play(self):
         return self._rng.choice(list(self.options))
 
     def update(self, outcome: MOVES):

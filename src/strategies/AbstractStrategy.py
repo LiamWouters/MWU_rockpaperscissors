@@ -12,12 +12,9 @@ class AbstractStrategy(ABC):
         self.options = options 
 
     @abstractmethod
-    def play(self, gameHistory: list) -> MOVES | COINFACE:
+    def play(self) -> MOVES | COINFACE:
         """
         Apply a strategy and return a move
-
-        Arguments:
-            - gameHistory: A chronological list of previous games
         """
         pass
 

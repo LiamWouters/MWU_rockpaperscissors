@@ -43,11 +43,11 @@ class MWURandomPlayer(AbstractStrategy):
         self._last_prediction_int = None
         self._last_expert_sampled_int = None
 
-    def play(self, game_history: list) -> MOVES:
+    def play(self) -> MOVES:
         """
         Samples a move using MWU-weighted random expert selection.
         """
-        expert_moves = [e.play(game_history) for e in self._experts]
+        expert_moves = [e.play() for e in self._experts]
 
         expert_moves_int = np.fromiter(
             (int(m) for m in expert_moves),

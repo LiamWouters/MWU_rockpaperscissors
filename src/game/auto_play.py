@@ -82,7 +82,7 @@ def run_rps_auto_play(
     game_history = []
     for round_number, human_move in enumerate(human_moves, start=1):
         weights_before = _weights_snapshot(player)
-        mwu_move = player.play(game_history)
+        mwu_move = player.play()
         expert_moves = player.last_expert_moves or []
         selected_expert_index = player.last_expert_sampled
         selected_expert_name = expert_names[int(selected_expert_index)]

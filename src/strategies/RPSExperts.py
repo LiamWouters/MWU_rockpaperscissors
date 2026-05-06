@@ -19,7 +19,7 @@ class FirstRandomThenFixedExpert(AbstractStrategy):
         self._rng = random.Random(seed)
         self._fixed_move = None
 
-    def play(self, gameHistory: list) -> MOVES:
+    def play(self) -> MOVES:
         if self._fixed_move is None:
             self._fixed_move = self._rng.choice(list(MOVES))
         return self._fixed_move
@@ -39,7 +39,7 @@ class CopycatLastHumanExpert(AbstractStrategy):
         self._opening_move = None
         self._last_human_move = None
 
-    def play(self, gameHistory: list) -> MOVES:
+    def play(self) -> MOVES:
         if self._last_human_move is not None:
             return self._last_human_move
 
@@ -62,7 +62,7 @@ class BeatLastHumanExpert(AbstractStrategy):
         self._opening_move = None
         self._last_human_move = None
 
-    def play(self, gameHistory: list) -> MOVES:
+    def play(self) -> MOVES:
         if self._last_human_move is not None:
             return move_that_beats(self._last_human_move)
 

@@ -44,7 +44,7 @@ def test_mwu_random_player_coin_game():
 
     # training phase
     for t in range(T):
-        player.play([])
+        player.play()
         player.update(COINFACE.HEADS)
         # after update
         print(f"Step {t + 1}")
@@ -69,7 +69,7 @@ def test_mwu_random_player_coin_game():
     sampled_moves = []
 
     for _ in range(n_samples):
-        move = player.play([])
+        move = player.play()
         sampled_moves.append(move)
 
     freq_heads = sampled_moves.count(COINFACE.HEADS) / n_samples

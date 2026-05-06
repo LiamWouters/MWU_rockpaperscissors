@@ -48,11 +48,11 @@ class WeightedMajorityPlayer(AbstractStrategy):
 
         self._regret_tracker = regret_tracker
 
-    def play(self, game_history: list) -> MOVES:
+    def play(self) -> MOVES:
         """
         Returns a move using weighted majority vote over expert predictions.
         """
-        expert_moves = [e.play(game_history) for e in self._experts]
+        expert_moves = [e.play() for e in self._experts]
 
         expert_moves_int = np.fromiter(
             (int(m) for m in expert_moves),
