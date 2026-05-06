@@ -1,7 +1,10 @@
 #### MANUAL GITIGNORE ADDITIONS
 RPS_input.txt
 RPS_manual_history.txt
-CF_manual_history.txt
+CF_history.txt
+CF_history_summary.txt
+
+log/
 
 #### AUTO GENERATED GITIGNORE
 # Byte-compiled / optimized / DLL files

@@ -3,15 +3,9 @@ import numpy as np
 from strategies import AbstractStrategy, WeightedMajorityPlayer
 from algorithms import WeightedMajorityRegretTracker
 from game import LossComputer
-
+from game.util import COINFACE
 
 from enum import IntEnum
-
-
-class CoinMove(IntEnum):
-    TAILS = 0
-    HEADS = 1
-
 
 class DummyExpert(AbstractStrategy):
     def __init__(self, fixed_move):
@@ -31,8 +25,8 @@ class DummyLoss(LossComputer):
 
 def test_weighted_majority_player_coin_game():
     experts = [
-        DummyExpert(CoinMove.TAILS),
-        DummyExpert(CoinMove.HEADS),
+        DummyExpert(COINFACE.TAILS),
+        DummyExpert(COINFACE.HEADS),
     ]
 
     loss_fn = DummyLoss()
@@ -43,7 +37,7 @@ def test_weighted_majority_player_coin_game():
     player = WeightedMajorityPlayer(
         experts=experts,
         loss_computer=loss_fn,
-        moves_enum=CoinMove,
+        moves_enum=COINFACE,
         alpha=alpha,
         regret_tracker=WeightedMajorityRegretTracker(len(experts), alpha, max_t=50),
     )
@@ -51,8 +45,8 @@ def test_weighted_majority_player_coin_game():
     for t in range(T):
         move = player.play([])
         if t >= 1:
-            assert move == CoinMove.HEADS
-        player.update(CoinMove.HEADS)
+            assert move == COINFACE.HEADS
+        player.update(COINFACE.HEADS)
 
         # after update
         print(f"Step {t + 1}")

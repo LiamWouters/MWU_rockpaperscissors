@@ -9,7 +9,7 @@ RPS_INPUT_FILE_PATH = os.path.join(os.getcwd(), "RPS_input.txt")
 class PlayAutoRPS(GameScreen):
     def __init__(self, screen, experts=None):
         super().__init__(screen)
-        self.experts = experts or {"random": RandomExpert()}
+        self.experts = experts or {"random": RandomExpert(MOVES)}
         self._has_run = False
         self._last_result = None
         
@@ -32,7 +32,7 @@ class PlayAutoRPS(GameScreen):
         self.elements["LOG_PATH_TEXT"] = TextLabel(
             pos=(self.screen.get_width() * 50/100, self.screen.get_height() * 21/100),
             font=get_font(14),
-            text="",
+            text=""
         )
 
     def _draw(self):

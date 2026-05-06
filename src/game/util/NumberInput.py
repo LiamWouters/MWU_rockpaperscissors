@@ -7,6 +7,8 @@ class NumberInput(UIelement):
                  font,
                  size=(None, None), # Ignored
                  fixed_width=100,
+                 upperLimit=None,   # inclusive lower limit (x): [x
+                 lowerLimit=None,   # inclusive upper limit (y):   ,y]
                  callback=None,
                  start_text="template",
                  start_value=0.0,
@@ -24,6 +26,8 @@ class NumberInput(UIelement):
         self.colors = colors
         self.start_text = start_text
         self.callback = callback
+        self.lowerLimit = lowerLimit
+        self.upperLimit = upperLimit
         
         self.selected = False
         self.confirmed_value = start_value
@@ -54,10 +58,16 @@ class NumberInput(UIelement):
                 self.value = ""
         else:
             try:
-                self.confirmed_value = float(self.value)
+                toConfirm = float(self.value) # Confirm if valid
+                if (self.lowerLimit != None and toConfirm < self.lowerLimit):
+                    raise ValueError(f"Invalid input: Under lower limit ({self.lowerLimit})")
+                if (self.upperLimit != None and toConfirm > self.upperLimit):
+                    raise ValueError(f"Invalid input: Over upper limit ({self.upperLimit})")
+                self.confirmed_value = toConfirm
                 if self.callback:
                     self.callback(self.confirmed_value)
-            except ValueError:
+            except ValueError as e:
+                print(e)
                 self.value = self.start_text
         
         self.selected = not self.selected

@@ -15,6 +15,7 @@ class FirstRandomThenFixedExpert(AbstractStrategy):
     """
 
     def __init__(self, seed=1):
+        super().__init__(MOVES)
         self._rng = random.Random(seed)
         self._fixed_move = None
 
@@ -33,6 +34,7 @@ class CopycatLastHumanExpert(AbstractStrategy):
     """
 
     def __init__(self, seed=2):
+        super().__init__(MOVES)
         self._rng = random.Random(seed)
         self._opening_move = None
         self._last_human_move = None
@@ -55,6 +57,7 @@ class BeatLastHumanExpert(AbstractStrategy):
     """
 
     def __init__(self, seed=3):
+        super().__init__(MOVES)
         self._rng = random.Random(seed)
         self._opening_move = None
         self._last_human_move = None

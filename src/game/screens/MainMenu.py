@@ -16,6 +16,12 @@ class MainMenu(GameScreen):
             text="Play Auto",
             show_bounding_box=False
         )
+        self.elements["PLAY_CF_BUTTON"] = Button(
+            pos=(self.screen.get_width()/2, self.screen.get_height()* 2/6),
+            font=get_font(18),
+            text="Play",
+            show_bounding_box=False,
+        )
         self.elements["GENERATE_INPUT_BUTTON"] = Button(
             pos=(self.screen.get_width()/2, self.screen.get_height()* 3/6),
             font=get_font(18),
@@ -43,6 +49,8 @@ class MainMenu(GameScreen):
             show_bounding_box=False
         )
         
+        self.toggleMenu(False)
+        
     def _draw(self):
         self.screen.blit(self.elements["TITLE_TEXT"], self.elements["TITLE_RECT"])
     
@@ -52,15 +60,11 @@ class MainMenu(GameScreen):
                 return GAMESTATE.STOPPED
             if event.type == pygame.MOUSEBUTTONUP:
                 if self.elements["PLAY_MANUAL_BUTTON"].is_hovered():
-                    if self.selected_game == GAMES.RPS:
-                        return GAMESTATE.PLAYMANUALRPS
-                    else:
-                        return GAMESTATE.PLAYMANUALCF
+                    return GAMESTATE.PLAYMANUALRPS
                 elif self.elements["PLAY_AUTO_BUTTON"].is_hovered():
-                    if self.selected_game == GAMES.RPS:
-                        return GAMESTATE.PLAYAUTORPS
-                    else:
-                        return GAMESTATE.PLAYAUTOCF
+                    return GAMESTATE.PLAYAUTORPS
+                elif self.elements["PLAY_CF_BUTTON"].is_hovered():
+                    return GAMESTATE.PLAYCF
                 elif self.elements["GENERATE_INPUT_BUTTON"].is_hovered():
                     return GAMESTATE.GENERATEINPUT
                 elif self.elements["QUIT_BUTTON"].is_hovered():
@@ -75,8 +79,10 @@ class MainMenu(GameScreen):
         self.updateTitle(f"MWU {self.selected_game.value}")
         
         # Change elements
+        self.elements["PLAY_AUTO_BUTTON"].active = not is_cf
         self.elements["PLAY_MANUAL_BUTTON"].active = not is_cf
         self.elements["GENERATE_INPUT_BUTTON"].active = not is_cf
+        self.elements["PLAY_CF_BUTTON"].active = is_cf
     
     def updateTitle(self, newTitle):
         self.elements["TITLE_TEXT"] = get_font(34).render(newTitle, True, white)

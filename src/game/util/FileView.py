@@ -40,6 +40,10 @@ class FileView(UIelement):
         text_rect = pygame.Rect(5, 5, self.bounding_box.width - 10, self.bounding_box.height - 10) # Create rect holding the text (5 px smaller on each side than bounding box)
         
         drawText(self.text_surface, contents, self.colors["text"], text_rect, self.font, aa=True)
+        
+    def change_file(self, new_file_path):
+        self.file_path = new_file_path
+        self.update_contents()
 
 ###############
 ## drawText method source: https://www.pygame.org/wiki/TextWrap
