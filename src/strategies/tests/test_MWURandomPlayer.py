@@ -3,13 +3,8 @@ import numpy as np
 from algorithms import MWURegretTracker
 from strategies import AbstractStrategy, MWURandomPlayer
 from game import LossComputer
+from game.util import COINFACE
 from enum import IntEnum
-
-
-class CoinMove(IntEnum):
-    TAILS = 0
-    HEADS = 1
-
 
 class DummyExpert(AbstractStrategy):
     def __init__(self, fixed_move):
@@ -29,8 +24,8 @@ class DummyLoss(LossComputer):
 
 def test_mwu_random_player_coin_game():
     experts = [
-        DummyExpert(CoinMove.TAILS),  # always wrong
-        DummyExpert(CoinMove.HEADS),  # always correct
+        DummyExpert(COINFACE.TAILS),  # always wrong
+        DummyExpert(COINFACE.HEADS),  # always correct
     ]
 
     loss_fn = DummyLoss()
@@ -39,7 +34,7 @@ def test_mwu_random_player_coin_game():
     player = MWURandomPlayer(
         experts=experts,
         loss_computer=loss_fn,
-        moves_enum=CoinMove,
+        moves_enum=COINFACE,
         alpha=0.5,
         seed=42,
         regret_tracker=MWURegretTracker(len(experts), alpha, max_t=200),
@@ -50,7 +45,7 @@ def test_mwu_random_player_coin_game():
     # training phase
     for t in range(T):
         player.play([])
-        player.update(CoinMove.HEADS)
+        player.update(COINFACE.HEADS)
         # after update
         print(f"Step {t + 1}")
         print("Cumulative loss per expert:", player.regret_tracker.cum_loss_experts)
@@ -65,8 +60,8 @@ def test_mwu_random_player_coin_game():
     probs = player.probabilities
 
     # probability concentration
-    assert probs[CoinMove.HEADS] > 0.95
-    assert probs[CoinMove.TAILS] < 0.05
+    assert probs[COINFACE.HEADS] > 0.95
+    assert probs[COINFACE.TAILS] < 0.05
     assert np.isclose(np.sum(probs), 1.0)
 
     # behavioral test (sampling)
@@ -77,7 +72,7 @@ def test_mwu_random_player_coin_game():
         move = player.play([])
         sampled_moves.append(move)
 
-    freq_heads = sampled_moves.count(CoinMove.HEADS) / n_samples
+    freq_heads = sampled_moves.count(COINFACE.HEADS) / n_samples
 
     # should strongly prefer HEADS
     assert freq_heads > 0.9

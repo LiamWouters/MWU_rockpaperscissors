@@ -1,4 +1,5 @@
 from typing import Optional
+from enum import IntEnum
 
 import numpy as np
 from algorithms import WeightedMajority
@@ -26,6 +27,7 @@ class WeightedMajorityPlayer(AbstractStrategy):
         alpha: float = 0.5,
         regret_tracker: Optional[WeightedMajorityRegretTracker] = None,
     ):
+        super().__init__(moves_enum)
         # binary action space
         assert len(moves_enum) == 2, "Only binary action spaces supported"
         values = {int(m) for m in moves_enum}

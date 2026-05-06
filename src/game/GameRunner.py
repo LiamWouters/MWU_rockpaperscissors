@@ -1,10 +1,11 @@
 from game.util.Enums import GAMESTATE, GAMES
-from game.screens import MainMenu, GenerateInput, PlayAutoRPS, PlayAutoCF, PlayManualRPS
+from game.screens import MainMenu, GenerateInput, PlayAutoRPS, PlayCF, PlayManualRPS
 import pygame
 
 class GameRunner:
-    def __init__(self, experts: dict, screenwidth=1280, screenheight=720):
-        self.experts = experts
+    def __init__(self, expertsRPS: dict, expertsCF: dict, screenwidth=1280, screenheight=720):
+        self.expertsRPS = expertsRPS
+        self.expertsCF = expertsCF
         
         # Start pygame window
         pygame.init()
@@ -17,8 +18,8 @@ class GameRunner:
         # Initialize screens
         self._main_menu = MainMenu(self.screen, self.game)
         self._generate = GenerateInput(self.screen)
-        self._play_auto_rps = PlayAutoRPS(self.screen)
-        self._play_auto_cf = PlayAutoCF(self.screen)
+        self._play_auto_rps = PlayAutoRPS(self.screen, self.expertsRPS)
+        self._play_cf = PlayCF(self.screen, self.expertsCF)
         self._play_manual_rps = PlayManualRPS(self.screen)
         
         # Start game loop
@@ -42,8 +43,8 @@ class GameRunner:
                     screenReturn = self._generate.process(events)
                 case GAMESTATE.PLAYAUTORPS:
                     screenReturn = self._play_auto_rps.process(events)
-                case GAMESTATE.PLAYAUTOCF:
-                    screenReturn = self._play_auto_cf.process(events)
+                case GAMESTATE.PLAYCF:
+                    screenReturn = self._play_cf.process(events)
                 case GAMESTATE.PLAYMANUALRPS:
                     screenReturn = self._play_manual_rps.process(events)
             
@@ -57,7 +58,7 @@ class GameRunner:
                     return
             
             pygame.display.update()
-            self.clock.tick(30)
+            self.clock.tick(60)
     
     def _update_game(self, new_game):
         self.game = new_game

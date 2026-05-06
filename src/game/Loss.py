@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 import numpy as np
-from game.util import MOVES
+from game.util import MOVES, COINFACE
 
 class LossComputer(ABC):
 
@@ -51,4 +51,26 @@ class RPSLoss(LossComputer):
         Arguments:
             - move: The move made by the player or expert
         """
-        pass
+        move = MOVES(move)
+        outcome = MOVES(outcome)
+
+        if move == outcome:
+            return 0.5
+
+        # With the current enum values:
+        # ROCK=0 beats SCISSORS=1, SCISSORS=1 beats PAPER=2,
+        # and PAPER=2 beats ROCK=0.
+        return 0.0 if (move - outcome) % 3 == 2 else 1.0
+
+class CFLoss(LossComputer):
+    def compute_loss(self, move: COINFACE, outcome: COINFACE) -> float:
+        """
+        Compute the loss for a given move. (move = prediction)
+        Returns:
+            0 if the player wins, prediction was correct
+            1 if the player loses, prediction was wrong
+
+        Arguments:
+            - move: The move made by the player or expert
+        """
+        return 0.0 if (move == outcome) else 1.0

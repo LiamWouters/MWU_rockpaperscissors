@@ -1,4 +1,5 @@
 from typing import Optional
+from enum import IntEnum
 
 import numpy as np
 from algorithms import MultiplicativeWeightsRandom
@@ -22,6 +23,7 @@ class MWURandomPlayer(AbstractStrategy):
         regret_tracker: Optional[MWURegretTracker] = None,
         seed: int = 42,
     ):
+        super().__init__(moves_enum)
         assert len(experts) > 0, "At least one expert required"
 
         self._experts = tuple(experts)
