@@ -31,7 +31,7 @@ class NumberInput(UIelement):
         
         self.selected = False
         self.confirmed_value = start_value
-        self.value = self.start_text if not self.confirmed_value else str(self.confirmed_value)
+        self.value = self.start_text if self.confirmed_value == None else str(self.confirmed_value)
         
         self.updateText()
     
@@ -80,7 +80,7 @@ class NumberInput(UIelement):
             elif event.key == pygame.K_RETURN: # enter pressed
                 self.toggleSelected()
             else:
-                if event.unicode.isnumeric() or event.unicode in ['.']:
+                if event.unicode.isnumeric() or event.unicode in ['.', '-']:
                     self.value += event.unicode
         self.updateText()
         

@@ -6,10 +6,10 @@ from algorithms import WeightedMajority
 from algorithms import WeightedMajorityRegretTracker
 from game.util import MOVES
 from game import LossComputer
-from strategies import AbstractStrategy
+from strategies import TrackedAbstractStrategy, AbstractStrategy
 
 
-class WeightedMajorityPlayer(AbstractStrategy):
+class WeightedMajorityPlayer(TrackedAbstractStrategy):
     """
     Player that plays using the Weighted Majority algorithm.
 
@@ -27,7 +27,7 @@ class WeightedMajorityPlayer(AbstractStrategy):
         alpha: float = 0.5,
         regret_tracker: Optional[WeightedMajorityRegretTracker] = None,
     ):
-        super().__init__(moves_enum)
+        super().__init__(moves_enum, regret_tracker)
         # binary action space
         assert len(moves_enum) == 2, "Only binary action spaces supported"
         values = {int(m) for m in moves_enum}
@@ -45,8 +45,6 @@ class WeightedMajorityPlayer(AbstractStrategy):
 
         self._last_expert_moves_int = None
         self._last_prediction_int = None
-
-        self._regret_tracker = regret_tracker
 
     def play(self) -> MOVES:
         """

@@ -6,10 +6,9 @@ from algorithms import MultiplicativeWeightsRandom
 from algorithms import MWURegretTracker
 from game.util import MOVES
 from game import LossComputer
-from strategies import AbstractStrategy
+from strategies import TrackedAbstractStrategy, AbstractStrategy
 
-
-class MWURandomPlayer(AbstractStrategy):
+class MWURandomPlayer(TrackedAbstractStrategy):
     """
     Player that uses Multiplicative Weights with randomized expert sampling.
     """
@@ -18,12 +17,12 @@ class MWURandomPlayer(AbstractStrategy):
         self,
         experts: list[AbstractStrategy],
         loss_computer: LossComputer,
-        moves_enum,
+        moves_enum: IntEnum,
         alpha: float = 0.5,
         regret_tracker: Optional[MWURegretTracker] = None,
         seed: int = 42,
     ):
-        super().__init__(moves_enum)
+        super().__init__(moves_enum, regret_tracker)
         assert len(experts) > 0, "At least one expert required"
 
         self._experts = tuple(experts)
@@ -37,7 +36,6 @@ class MWURandomPlayer(AbstractStrategy):
 
         self._loss_computer = loss_computer
         self._moves_enum = moves_enum
-        self._regret_tracker = regret_tracker
 
         self._last_expert_moves_int = None
         self._last_prediction_int = None
@@ -85,6 +83,8 @@ class MWURandomPlayer(AbstractStrategy):
         expected_learner_loss = np.dot(self._last_expert_probabilities, expert_losses)
 
         self._mwu.update(expert_losses)
+        
+        self.probability_history.append(self._mwu.probabilities) # Update parent class' probability history for the graph
 
         real_learner_loss = self._loss_computer.compute_loss(
             self._last_prediction_int,
@@ -106,6 +106,9 @@ class MWURandomPlayer(AbstractStrategy):
         for e in self._experts:
             e.update(outcome)
 
+    # --------------------------------------------------
+    # properties
+    # --------------------------------------------------
     @property
     def probabilities(self):
         return self._mwu.probabilities
