@@ -13,11 +13,3 @@ Algorithmic Foundations of Data Science group project of Azzam, Michel and Liam.
 3. Install dependencies into the venv:
     * `pip install -r requirements.txt`
 4. Run `python src/main.py`
-
-### Adding new dependencies?
-
-Use `pip install {DEPENDENCY NAME}` and update the requirements.txt by running `pip freeze > requirements.txt`!
-
-OR
-
-Manually add the new dependency to requirements.txt and re-run `pip install -r requirements.txt`
