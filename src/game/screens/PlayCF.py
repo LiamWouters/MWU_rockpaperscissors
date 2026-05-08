@@ -1,4 +1,4 @@
-import pygame, os, random, time
+import pygame, os, random, time, copy
 from game import CFLoss
 from game.util import GAMESTATE, GAMES, COINFACE, get_font, Button, FileView, NumberInput, TextLabel, Switch, ImageView
 from algorithms import WeightedMajorityRegretTracker, MWURegretTracker
@@ -14,6 +14,10 @@ def get_time_milliseconds():
 class PlayCF(GameScreen):
     def __init__(self, screen, experts: dict):
         super().__init__(screen)
+        
+        random_seed = time.time_ns()
+        print(f"--- PlayCF | Coin flip random seed: {random_seed} ---")
+        self._rng = random.Random(random_seed)
         
         # Persistent (cant reset)
         self.experts = experts
@@ -72,7 +76,7 @@ class PlayCF(GameScreen):
             start_value=self.alpha,
             start_text="alpha",
             lowerLimit=0,
-            upperLimit=1
+            upperLimit=0.5
         )
         self.elements["MAX_T_TEXT"] = TextLabel(
             pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 29/100),
@@ -296,7 +300,7 @@ class PlayCF(GameScreen):
             return
         
         normalized_heads_chance = self.heads_chance/100
-        self.latest_roll = random.choices([face for face in COINFACE], weights=(1-normalized_heads_chance, normalized_heads_chance))[0]
+        self.latest_roll = self._rng.choices([face for face in COINFACE], weights=(1-normalized_heads_chance, normalized_heads_chance))[0]
         latest_roll_text = "HEADS" if self.latest_roll == COINFACE.HEADS else "TAILS"
         self.total_rolls += 1
         self.last_move_time = get_time_milliseconds()
@@ -361,7 +365,7 @@ class PlayCF(GameScreen):
         
         # Reset learners (MWU, WM)
         self.MWU = MWURandomPlayer(
-            experts=self.experts.values(),
+            experts=copy.deepcopy(list(self.experts.values())),
             loss_computer=CFLoss(),
             moves_enum=COINFACE,
             alpha=self.alpha,
@@ -369,7 +373,7 @@ class PlayCF(GameScreen):
             seed=42
         )
         self.WM = WeightedMajorityPlayer(
-            experts=self.experts.values(),
+            experts=copy.deepcopy(list(self.experts.values())),
             loss_computer=CFLoss(),
             moves_enum=COINFACE,
             alpha=self.alpha,
