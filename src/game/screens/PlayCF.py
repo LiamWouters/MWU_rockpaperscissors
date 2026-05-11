@@ -27,7 +27,8 @@ class PlayCF(GameScreen):
         self.max_time_horizon = 200
         
         self.show_graph_weights = True
-        self.show_graph_winrate = True
+        self.show_graph_winrate = False
+        self.show_graph_ratio = False
         self.show_graph_bound = True
         self.show_graph_expected = True
         self.limit_graph_timesteps = 0  # 0 or lower means no limit
@@ -169,28 +170,34 @@ class PlayCF(GameScreen):
             lowerLimit=-1
         )
         self.elements["GRAPH_EXPECTED_TOGGLE"] = Switch(
-            pos=(self.screen.get_width() * 80/100, self.screen.get_height() * 87/100),
+            pos=(self.screen.get_width() * 60/100, self.screen.get_height() * 93/100),
             font=get_font(16),
             slider_size=(35,20),
             option1text="Hide expected loss"
         )
         self.elements["GRAPH_BOUND_TOGGLE"] = Switch(
-            pos=(self.screen.get_width() * 80/100, self.screen.get_height() * 90/100),
+            pos=(self.screen.get_width() * 60/100, self.screen.get_height() * 96/100),
             font=get_font(16),
             slider_size=(35,20),
             option1text="Hide bound"
         )
         self.elements["GRAPH_WEIGHTS_TOGGLE"] = Switch(
-            pos=(self.screen.get_width() * 80/100, self.screen.get_height() * 93/100),
+            pos=(self.screen.get_width() * 80/100, self.screen.get_height() * 87/100),
             font=get_font(16),
             slider_size=(35,20),
             option1text="Hide weights"
         )
         self.elements["GRAPH_WINRATE_TOGGLE"] = Switch(
-            pos=(self.screen.get_width() * 80/100, self.screen.get_height() * 96/100),
+            pos=(self.screen.get_width() * 80/100, self.screen.get_height() * 90/100),
             font=get_font(16),
             slider_size=(35,20),
             option1text="Hide winrate"
+        )
+        self.elements["GRAPH_RATIO_TOGGLE"] = Switch(
+            pos=(self.screen.get_width() * 80/100, self.screen.get_height() * 93/100),
+            font=get_font(16),
+            slider_size=(35,20),
+            option1text="Hide ratios"
         )
         
         self.reset()
@@ -259,6 +266,10 @@ class PlayCF(GameScreen):
                     self.elements["GRAPH_WINRATE_TOGGLE"].switch()
                     self.show_graph_winrate = not self.elements["GRAPH_WINRATE_TOGGLE"].state
                     self._draw_current_graph()
+                elif self.elements["GRAPH_RATIO_TOGGLE"].is_hovered():
+                    self.elements["GRAPH_RATIO_TOGGLE"].switch()
+                    self.show_graph_ratio = not self.elements["GRAPH_RATIO_TOGGLE"].state
+                    self._draw_current_graph()
                 
     def _set_heads_chance(self, value):
         self.heads_chance = value
@@ -294,6 +305,7 @@ class PlayCF(GameScreen):
                 show_bound=self.show_graph_bound,
                 show_expected=self.show_graph_expected,
                 show_winrate=self.show_graph_winrate,
+                show_ratio=self.show_graph_ratio,
                 size=(700, 500),
                 limit_timesteps=self.limit_graph_timesteps
             )
@@ -397,3 +409,17 @@ class PlayCF(GameScreen):
         self.elements["TOTAL_ROLLS"].updateText(f"Total Rolls: {self.total_rolls}")
         self.elements["HISTORY_VIEW"].update_contents()
         self.elements["GRAPH_VIEW"].clear()
+        
+        # Start toggles switched on if they should be
+        if not self.show_graph_ratio:   
+            self.elements["GRAPH_RATIO_TOGGLE"].switch()
+        if not self.show_graph_winrate:
+            self.elements["GRAPH_WINRATE_TOGGLE"].switch()
+        if not self.show_graph_weights:
+            self.elements["GRAPH_WEIGHTS_TOGGLE"].switch()
+        if not self.show_graph_expected:
+            self.elements["GRAPH_EXPECTED_TOGGLE"].switch()
+        if not self.show_graph_bound:
+            self.elements["GRAPH_BOUND_TOGGLE"].switch()
+        
+        self._draw_current_graph()
