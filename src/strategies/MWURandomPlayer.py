@@ -84,6 +84,7 @@ class MWURandomPlayer(TrackedAbstractStrategy):
 
         self._mwu.update(expert_losses)
         
+        self.win_history.append(int(self._last_prediction_int == outcome))
         self.probability_history.append(self._mwu.probabilities) # Update parent class' probability history for the graph
 
         real_learner_loss = self._loss_computer.compute_loss(

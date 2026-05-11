@@ -20,6 +20,7 @@ class TrackedAbstractStrategy(AbstractStrategy):
         self._regret_tracker = regret_tracker
         
         self.probability_history = []
+        self.win_history = []   # 1 is win, 0 is loss/draw
         
         # Graph rendering variables
         self._graph_surface = None
@@ -34,7 +35,8 @@ class TrackedAbstractStrategy(AbstractStrategy):
         self,
         show_weights: bool = True,
         show_bound: bool = True,
-        show_expected: bool = True,
+        show_expected: bool = True, 
+        show_winrate: bool = True,
         size: tuple[int, int] = (500, 500),
         limit_timesteps: Optional[int] = None
     ) -> None:
@@ -50,6 +52,7 @@ class TrackedAbstractStrategy(AbstractStrategy):
                 "show_weights": show_weights, 
                 "show_bound": show_bound,
                 "show_expected": show_expected,
+                "show_winrate": show_winrate,
                 "size": size,
                 "limit_timesteps": limit_timesteps,
             })
@@ -60,6 +63,7 @@ class TrackedAbstractStrategy(AbstractStrategy):
             show_weights=show_weights, 
             show_bound=show_bound, 
             show_expected=show_expected, 
+            show_winrate=show_winrate,
             size=size,
             limit_timesteps=limit_timesteps
         )
@@ -73,7 +77,7 @@ class TrackedAbstractStrategy(AbstractStrategy):
             self._graph_surface = None
         return surface
     
-    def _start_thread(self, show_weights, show_bound, show_expected, size, limit_timesteps):
+    def _start_thread(self, show_weights, show_bound, show_expected, show_winrate, size, limit_timesteps):
         """ Copy the data to plot in its current state for the thread """
         probability_history  = list(self.probability_history)
         expert_names  = [type(e).__name__ for e in self._experts]
@@ -94,7 +98,7 @@ class TrackedAbstractStrategy(AbstractStrategy):
         thread = threading.Thread(
             target=self._render_graph_thread,
             args=(
-                show_weights, show_bound, show_expected, size, limit_timesteps,
+                show_weights, show_bound, show_expected, show_winrate, size, limit_timesteps,
                 expert_names,
                 t,
                 probability_history,
@@ -110,7 +114,7 @@ class TrackedAbstractStrategy(AbstractStrategy):
     def _render_graph_thread(
         self,
         # Flags & Size
-        show_weights, show_bound, show_expected, size, limit_timesteps,
+        show_weights, show_bound, show_expected, show_winrate, size, limit_timesteps,
         # Data
         expert_names,
         t,
@@ -125,21 +129,16 @@ class TrackedAbstractStrategy(AbstractStrategy):
             if show_weights and len(probability_history) == 0:
                 show_weights = False
             
-            if show_weights:
-                layout = """
-                    A
-                    B
-                """
-            else:
-                layout = """
-                    B
-                """
+            layout = f"{"A\n" if show_weights else ""}{"C\n" if show_winrate else ""}B"
             
             dpi = 100
             figsize = (size[0] / dpi, size[1] / dpi) # pixel size to figure size
             fig, axs = plt.subplot_mosaic(layout, figsize=figsize, dpi=dpi)
             
             timeSteps = [i for i in range(t)]
+            
+            # Calculate winrate history from win history
+            winrate_history = (np.cumsum(self.win_history) / np.arange(1, len(self.win_history) + 1)) * 100 if show_winrate else []
             
             if limit_timesteps and len(timeSteps) > limit_timesteps:
                 timeSteps = timeSteps[-limit_timesteps:]
@@ -148,6 +147,7 @@ class TrackedAbstractStrategy(AbstractStrategy):
                 history_expected = history_expected[-limit_timesteps:]
                 history_best = history_best[-limit_timesteps:]
                 history_bound = history_bound[-limit_timesteps:]
+                winrate_history = winrate_history[-limit_timesteps:]
             
             if show_weights:
                 # probability_history: list of arrays, where each array contains all the weights for a specific timestep
@@ -165,6 +165,20 @@ class TrackedAbstractStrategy(AbstractStrategy):
                     axs['A'].set_xlim(timeSteps[0], timeSteps[-1])
                 axs['A'].set_ylabel('Probability')
                 axs['A'].legend(loc="upper left", fontsize="x-small")
+                
+            if show_winrate:
+                if len(winrate_history) > len(timeSteps): # For a race condition where the winrate history is a step ahead of the curren time the graph is processing
+                    winrate_history = winrate_history[:len(timeSteps)]
+                
+                axs['C'].plot(timeSteps, winrate_history, linestyle='-', linewidth=2, label="winrate", color="yellow")
+                axs['C'].set_title('Learner winrate over time')
+                axs['C'].set_xlabel('Time')
+                if len(timeSteps) > 1:
+                    axs['C'].set_xlim(timeSteps[0], timeSteps[-1])
+                axs['C'].set_ylabel('Winrate (%)')
+                axs['C'].set_ylim(0,100)
+                axs['C'].legend(loc="upper left", fontsize="x-small")
+                axs['C'].grid(True, axis='y')
             
             ## LOSSES GRAPH
             axs['B'].plot(timeSteps, history_learner, linestyle='-', linewidth=2, label="learner")
