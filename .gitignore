@@ -1,6 +1,10 @@
 #### MANUAL GITIGNORE ADDITIONS
 RPS_input.txt
+RPS_auto_history.txt
+RPS_auto_expert_stats.txt
 RPS_manual_history.txt
+RPS_manual_history.json
+RPS_manual_expert_stats.txt
 CF_history.txt
 CF_history_summary.txt
 
