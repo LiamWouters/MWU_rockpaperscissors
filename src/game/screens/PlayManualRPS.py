@@ -17,6 +17,7 @@ from game.util import (
     NumberInput,
     TextLabel,
     Switch,
+    Panel,
     get_font,
 )
 from strategies import MWURandomPlayer
@@ -38,6 +39,8 @@ class PlayManualRPS(GameScreen):
         self.alpha = 0.5
         self.max_time_horizon = 200
         self.show_graph_weights = True
+        self.show_graph_winrate = False
+        self.show_graph_ratio = False
         self.show_graph_bound = True
         self.show_graph_expected = True
         self.limit_graph_timesteps = 0
@@ -59,21 +62,15 @@ class PlayManualRPS(GameScreen):
             font=get_font(18),
             text="<- BACK",
         )
-        self.elements["HISTORY_VIEW"] = FileView(
-            pos=(self.screen.get_width() * 14 / 100, self.screen.get_height() * 53 / 100),
-            size=(self.screen.get_width() * 22 / 100, self.screen.get_height() * 70 / 100),
-            font=get_font(12),
-            file_path=RPS_HISTORY_DISPLAY_FILE_PATH,
-            preamble="LAST 10 ROUNDS:",
-            show_bounding_box=True,
-        )
+        
+        # Algorithm settings
         self.elements["ALPHA_INPUT_TEXT"] = TextLabel(
-            pos=(self.screen.get_width() * 34 / 100, self.screen.get_height() * 15 / 100),
+            pos=(self.screen.get_width() * 47 / 100, self.screen.get_height() * 87 / 100),
             font=get_font(16),
             text="Set Alpha (LR):",
         )
         self.elements["ALPHA_INPUT"] = NumberInput(
-            pos=(self.screen.get_width() * 34 / 100, self.screen.get_height() * 18 / 100),
+            pos=(self.screen.get_width() * 47 / 100, self.screen.get_height() * 90 / 100),
             font=get_font(16),
             fixed_width=135,
             callback=self._set_alpha,
@@ -83,12 +80,12 @@ class PlayManualRPS(GameScreen):
             upperLimit=0.5,
         )
         self.elements["MAX_T_TEXT"] = TextLabel(
-            pos=(self.screen.get_width() * 34 / 100, self.screen.get_height() * 22 / 100),
+            pos=(self.screen.get_width() * 47 / 100, self.screen.get_height() * 93 / 100),
             font=get_font(16),
             text="Set max time horizon:",
         )
         self.elements["MAX_T_INPUT"] = NumberInput(
-            pos=(self.screen.get_width() * 34 / 100, self.screen.get_height() * 25 / 100),
+            pos=(self.screen.get_width() * 47 / 100, self.screen.get_height() * 96 / 100),
             font=get_font(16),
             fixed_width=135,
             callback=self._set_max_time_horizon,
@@ -96,95 +93,164 @@ class PlayManualRPS(GameScreen):
             start_text="time horizon",
             lowerLimit=1,
         )
+        self.elements["ALGORITHM_SETTINGS_PANEL"] = Panel(
+            elements=[
+                self.elements["ALPHA_INPUT_TEXT"],
+                self.elements["ALPHA_INPUT"],
+                self.elements["MAX_T_TEXT"],
+                self.elements["MAX_T_INPUT"]
+            ],
+            x_padding=6,
+            y_padding=4
+        )
+        
         self.elements["ROCK_BUTTON"] = Button(
-            pos=(self.screen.get_width() * 28 / 100, self.screen.get_height() * 39 / 100),
+            pos=(self.screen.get_width() * 47 / 100, self.screen.get_height() * 81 / 100),
             font=get_font(28),
             text="ROCK",
             show_bounding_box=True,
         )
         self.elements["PAPER_BUTTON"] = Button(
-            pos=(self.screen.get_width() * 40 / 100, self.screen.get_height() * 39 / 100),
+            pos=(self.screen.get_width() * 65 / 100, self.screen.get_height() * 81 / 100),
             font=get_font(28),
             text="PAPER",
             show_bounding_box=True,
         )
         self.elements["SCISSORS_BUTTON"] = Button(
-            pos=(self.screen.get_width() * 54 / 100, self.screen.get_height() * 39 / 100),
+            pos=(self.screen.get_width() * 85 / 100, self.screen.get_height() * 81 / 100),
             font=get_font(28),
             text="SCISSORS",
             show_bounding_box=True,
         )
+        
         self.elements["HUMAN_MOVE"] = TextLabel(
-            pos=(self.screen.get_width() * 41 / 100, self.screen.get_height() * 50 / 100),
+            pos=(self.screen.get_width() * 18 / 100, self.screen.get_height() * 16 / 100),
             font=get_font(18),
             text="Your Move:",
         )
         self.elements["MWU_MOVE"] = TextLabel(
-            pos=(self.screen.get_width() * 41 / 100, self.screen.get_height() * 55 / 100),
+            pos=(self.screen.get_width() * 18 / 100, self.screen.get_height() * 20 / 100),
             font=get_font(18),
             text="MWU Move:",
         )
         self.elements["ROUND_RESULT"] = TextLabel(
-            pos=(self.screen.get_width() * 41 / 100, self.screen.get_height() * 60 / 100),
+            pos=(self.screen.get_width() * 18 / 100, self.screen.get_height() * 25 / 100),
             font=get_font(18),
             text="Result:",
         )
         self.elements["SCORE_TEXT"] = TextLabel(
-            pos=(self.screen.get_width() * 41 / 100, self.screen.get_height() * 66 / 100),
+            pos=(self.screen.get_width() * 18 / 100, self.screen.get_height() * 31 / 100),
             font=get_font(16),
             text="Score: MWU 0 | You 0 | Draws 0",
         )
         self.elements["ROUND_TEXT"] = TextLabel(
-            pos=(self.screen.get_width() * 41 / 100, self.screen.get_height() * 71 / 100),
+            pos=(self.screen.get_width() * 18 / 100, self.screen.get_height() * 35 / 100),
             font=get_font(16),
             text="Total Rounds: 0",
         )
+        self.elements["DATA_PANEL"] = Panel(
+            elements=[
+                self.elements["HUMAN_MOVE"],
+                self.elements["MWU_MOVE"],
+                self.elements["ROUND_RESULT"],
+                self.elements["SCORE_TEXT"],
+                self.elements["ROUND_TEXT"],
+            ]
+        )
+        
+        # Expert ranking file
         self.elements["EXPERT_STATS_VIEW"] = FileView(
-            pos=(self.screen.get_width() * 41 / 100, self.screen.get_height() * 84 / 100),
-            size=(self.screen.get_width() * 34 / 100, self.screen.get_height() * 18 / 100),
+            pos=(self.screen.get_width() * 18 / 100, self.screen.get_height() * 89 / 100),
+            size=(self.screen.get_width() * 32 / 100, self.screen.get_height() * 17 / 100),
             font=get_font(12),
             file_path=RPS_EXPERT_STATS_FILE_PATH,
             preamble="EXPERT RANKING:",
             show_bounding_box=True,
         )
+        # History (last 10 rounds)
+        self.elements["HISTORY_VIEW"] = FileView(
+            pos=(self.screen.get_width() * 18 / 100, self.screen.get_height() * 60 / 100),
+            size=(self.screen.get_width() * 32 / 100, self.screen.get_height() * 35 / 100),
+            font=get_font(12),
+            file_path=RPS_HISTORY_DISPLAY_FILE_PATH,
+            preamble="LAST 10 AUTO ROUNDS:",
+            show_bounding_box=True,
+        )
+        self.elements["FILE_VIEWS_PANEL"] = Panel(
+            elements=[self.elements["HISTORY_VIEW"], self.elements["EXPERT_STATS_VIEW"]],
+            x_padding=4,
+            y_padding=4
+        )
 
         ### GRAPH
         self.elements["GRAPH_VIEW"] = ImageView(
-            pos=(self.screen.get_width() * 78 / 100, self.screen.get_height() * 46 / 100),
+            pos=(self.screen.get_width() * 67 / 100, self.screen.get_height() * 44 / 100),
             image=None,
             show_bounding_box=False,
         )
+        self.elements["GRAPH_VIEW_PANEL"] = Panel(
+            elements=[self.elements["GRAPH_VIEW"]],
+            x_padding=2,
+            y_padding=2
+        )
+        
+        ## Graph settings
         self.elements["GRAPH_LIMIT_TEXT"] = TextLabel(
-            pos=(self.screen.get_width() * 62 / 100, self.screen.get_height() * 87 / 100),
+            pos=(self.screen.get_width() * 70/100, self.screen.get_height() * 87/100),
             font=get_font(16),
-            text="Set timestep limit:",
+            text="Set timestep limit:"
         )
         self.elements["GRAPH_LIMIT_INPUT"] = NumberInput(
-            pos=(self.screen.get_width() * 62 / 100, self.screen.get_height() * 90 / 100),
+            pos=(self.screen.get_width() * 70/100, self.screen.get_height() * 90/100),
             font=get_font(16),
             fixed_width=100,
             callback=self._set_timestep_limit,
             start_value=self.limit_graph_timesteps,
             start_text="timestep limit",
-            lowerLimit=-1,
+            lowerLimit=-1
         )
         self.elements["GRAPH_EXPECTED_TOGGLE"] = Switch(
-            pos=(self.screen.get_width() * 83 / 100, self.screen.get_height() * 87 / 100),
+            pos=(self.screen.get_width() * 70/100, self.screen.get_height() * 93/100),
             font=get_font(16),
-            slider_size=(35, 20),
-            option1text="Hide expected loss",
+            slider_size=(35,20),
+            option1text="Hide expected loss"
         )
         self.elements["GRAPH_BOUND_TOGGLE"] = Switch(
-            pos=(self.screen.get_width() * 83 / 100, self.screen.get_height() * 90 / 100),
+            pos=(self.screen.get_width() * 70/100, self.screen.get_height() * 96/100),
             font=get_font(16),
-            slider_size=(35, 20),
-            option1text="Hide bound",
+            slider_size=(35,20),
+            option1text="Hide bound"
         )
         self.elements["GRAPH_WEIGHTS_TOGGLE"] = Switch(
-            pos=(self.screen.get_width() * 83 / 100, self.screen.get_height() * 93 / 100),
+            pos=(self.screen.get_width() * 90/100, self.screen.get_height() * 87/100),
             font=get_font(16),
-            slider_size=(35, 20),
-            option1text="Hide weights",
+            slider_size=(35,20),
+            option1text="Hide weights"
+        )
+        self.elements["GRAPH_WINRATE_TOGGLE"] = Switch(
+            pos=(self.screen.get_width() * 90/100, self.screen.get_height() * 90/100),
+            font=get_font(16),
+            slider_size=(35,20),
+            option1text="Hide winrate"
+        )
+        self.elements["GRAPH_RATIO_TOGGLE"] = Switch(
+            pos=(self.screen.get_width() * 90/100, self.screen.get_height() * 93/100),
+            font=get_font(16),
+            slider_size=(35,20),
+            option1text="Hide ratios"
+        )
+        self.elements["GRAPH_SETTINGS_PANEL"] = Panel(
+            elements=[
+                self.elements["GRAPH_LIMIT_TEXT"],
+                self.elements["GRAPH_LIMIT_INPUT"],
+                self.elements["GRAPH_EXPECTED_TOGGLE"],
+                self.elements["GRAPH_BOUND_TOGGLE"],
+                self.elements["GRAPH_WINRATE_TOGGLE"],
+                self.elements["GRAPH_WEIGHTS_TOGGLE"],
+                self.elements["GRAPH_RATIO_TOGGLE"],
+            ],
+            x_padding=2,
+            y_padding=2
         )
 
         self.reset()
@@ -231,6 +297,14 @@ class PlayManualRPS(GameScreen):
                     self.elements["GRAPH_WEIGHTS_TOGGLE"].switch()
                     self.show_graph_weights = not self.elements["GRAPH_WEIGHTS_TOGGLE"].state
                     self._draw_current_graph()
+                elif self.elements["GRAPH_RATIO_TOGGLE"].is_hovered():
+                    self.elements["GRAPH_RATIO_TOGGLE"].switch()
+                    self.show_graph_ratio = not self.elements["GRAPH_RATIO_TOGGLE"].state
+                    self._draw_current_graph()
+                elif self.elements["GRAPH_WINRATE_TOGGLE"].is_hovered():
+                    self.elements["GRAPH_WINRATE_TOGGLE"].switch()
+                    self.show_graph_winrate = not self.elements["GRAPH_WINRATE_TOGGLE"].state
+                    self._draw_current_graph()
 
     def _set_alpha(self, value):
         if self.alpha == value:
@@ -248,18 +322,22 @@ class PlayManualRPS(GameScreen):
         self.limit_graph_timesteps = int(value)
         self._draw_current_graph()
 
-    def _draw_current_graph(self):
+    def _draw_current_graph(self, save_to_file: bool = False):
         self.MWU.draw_graph(
             show_weights=self.show_graph_weights,
             show_bound=self.show_graph_bound,
             show_expected=self.show_graph_expected,
-            size=(520, 430),
+            show_ratio=self.show_graph_ratio,
+            show_winrate=self.show_graph_winrate,
+            size=(750, 465),
             limit_timesteps=self.limit_graph_timesteps,
+            save_to_file=save_to_file
         )
 
     def _play_round(self, human_move: MOVES):
         if self.total_rounds >= self.MWU.regret_tracker._max_t:
             self.elements["ROUND_RESULT"].updateText("Result: max time horizon reached")
+            self._draw_current_graph(save_to_file=True)
             return
 
         round_number = self.total_rounds + 1
@@ -382,6 +460,20 @@ class PlayManualRPS(GameScreen):
         self.elements["SCORE_TEXT"].updateText("Score: MWU 0 | You 0 | Draws 0")
         self.elements["ROUND_TEXT"].updateText("Total Rounds: 0")
         self.elements["GRAPH_VIEW"].clear()
+        
+        # Start toggles switched on if they should be (and arent)
+        if not self.show_graph_ratio and not self.elements["GRAPH_RATIO_TOGGLE"].state:   
+            self.elements["GRAPH_RATIO_TOGGLE"].switch()
+        if not self.show_graph_winrate and not self.elements["GRAPH_WINRATE_TOGGLE"].state:
+            self.elements["GRAPH_WINRATE_TOGGLE"].switch()
+        if not self.show_graph_weights and not self.elements["GRAPH_WEIGHTS_TOGGLE"].state:
+            self.elements["GRAPH_WEIGHTS_TOGGLE"].switch()
+        if not self.show_graph_expected and not self.elements["GRAPH_EXPECTED_TOGGLE"].state:
+            self.elements["GRAPH_EXPECTED_TOGGLE"].switch()
+        if not self.show_graph_bound and not self.elements["GRAPH_BOUND_TOGGLE"].state:
+            self.elements["GRAPH_BOUND_TOGGLE"].switch()
+            
+        self._draw_current_graph()
 
     def _write_history(self):
         with open(RPS_HISTORY_FILE_PATH, "w", encoding="utf-8") as f:

@@ -327,15 +327,16 @@ class PlayAutoRPS(GameScreen):
         self.elements["LOG_PATH_TEXT"].updateText("Log:")
         self.elements["GRAPH_VIEW"].clear()
         
-        if not self.show_graph_ratio:   
+        # Start toggles switched on if they should be (and arent)
+        if not self.show_graph_ratio and not self.elements["GRAPH_RATIO_TOGGLE"].state:   
             self.elements["GRAPH_RATIO_TOGGLE"].switch()
-        if not self.show_graph_winrate:
+        if not self.show_graph_winrate and not self.elements["GRAPH_WINRATE_TOGGLE"].state:
             self.elements["GRAPH_WINRATE_TOGGLE"].switch()
-        if not self.show_graph_weights:
+        if not self.show_graph_weights and not self.elements["GRAPH_WEIGHTS_TOGGLE"].state:
             self.elements["GRAPH_WEIGHTS_TOGGLE"].switch()
-        if not self.show_graph_expected:
+        if not self.show_graph_expected and not self.elements["GRAPH_EXPECTED_TOGGLE"].state:
             self.elements["GRAPH_EXPECTED_TOGGLE"].switch()
-        if not self.show_graph_bound:
+        if not self.show_graph_bound and not self.elements["GRAPH_BOUND_TOGGLE"].state:
             self.elements["GRAPH_BOUND_TOGGLE"].switch()
 
     def _run_auto_play(self):
