@@ -111,13 +111,6 @@ class PlayCF(GameScreen):
             start_text="interval",
             lowerLimit=0
         )
-        self.elements["AUTO_TOGGLE"] = Switch(
-            pos=(self.screen.get_width() * 29/100, self.screen.get_height() * 43/100),
-            font=get_font(16),
-            slider_size=(35,20),
-            option1text="Auto Play",
-            show_bg=True
-        )
         self.elements["SETTINGS_PANEL"] = Panel(
             elements=[
                 self.elements["HEADS_CHANCE_INPUT_TEXT"],
@@ -127,11 +120,17 @@ class PlayCF(GameScreen):
                 self.elements["MAX_T_TEXT"],
                 self.elements["MAX_T_INPUT"],
                 self.elements["AUTO_INTERVAL_TEXT"],
-                self.elements["AUTO_INTERVAL_TEXT"],
-                self.elements["AUTO_TOGGLE"],
+                self.elements["AUTO_INTERVAL_INPUT"],
             ],
-            y_padding=5,
+            y_padding=7,
             x_padding=4
+        )
+        self.elements["AUTO_TOGGLE"] = Switch(
+            pos=(self.screen.get_width() * 29/100, self.screen.get_height() * 45/100),
+            font=get_font(16),
+            slider_size=(35,20),
+            option1text="Auto Play",
+            show_bg=True
         )
         self.elements["ROLL_BUTTON"] = Button(
             pos=(self.screen.get_width() * 29/100, self.screen.get_height() * 51/100),
