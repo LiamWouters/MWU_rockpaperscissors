@@ -10,8 +10,10 @@ class TextLabel(UIelement):
                  colors={
                      "default": "#cccccc"
                  },
-                 show_bounding_box=False):
-        super().__init__(pos, size[0], size[1], show_bounding_box=show_bounding_box)
+                 show_bounding_box=False,
+                 show_bg=False,
+                 active=True):
+        super().__init__(pos, size[0], size[1], show_bounding_box=show_bounding_box, show_bg=show_bg, active=active)
         
         self.font = font
         self.colors = colors

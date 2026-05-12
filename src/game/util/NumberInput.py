@@ -18,10 +18,12 @@ class NumberInput(UIelement):
                      "locked_text": "#5684D8",
                      "text": "#ffffff"
                  },
-                 show_bounding_box=False):
+                 show_bounding_box=False,
+                 show_bg=False,
+                 active=True):
         self.font = font
         
-        super().__init__(pos, fixed_width, self.font.get_linesize(), show_bounding_box=show_bounding_box)        
+        super().__init__(pos, fixed_width, self.font.get_linesize(), show_bounding_box=show_bounding_box, show_bg=show_bg, active=active)        
         
         self.colors = colors
         self.start_text = start_text

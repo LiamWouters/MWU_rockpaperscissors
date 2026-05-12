@@ -15,15 +15,17 @@ class GameScreen(ABC):
         self.elements = {}
     
     def process(self, events):
-        self.screen.fill("black")
+        self.screen.fill("#171c23")
         
         # Draw screen specific elements (UIelement inheritants are drawn seperately)
         self._draw()
         
+        uielements = [e for _, e in self.elements.items() if isinstance(e, UIelement)]
+        sorted_UIelements = sorted(uielements, key=lambda x: x.z_layer)
+        
         ## Draw all UIelements
-        for _, element in self.elements.items():
-            if isinstance(element, UIelement):
-                element.draw(self.screen) 
+        for element in sorted_UIelements:
+            element.draw(self.screen) 
         
         return self._handle_events(events)   
     

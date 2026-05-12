@@ -18,7 +18,7 @@ class GenerateInput(GameScreen):
         self.elements["BACK_BUTTON"] = Button(
             pos=(100, 50),
             font=get_font(18),
-            text="BACK",
+            text="<- BACK",
         )
 
     def _draw(self):

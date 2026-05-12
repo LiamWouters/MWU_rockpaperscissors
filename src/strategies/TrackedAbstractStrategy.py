@@ -13,6 +13,32 @@ from typing import Optional
 from .AbstractStrategy import AbstractStrategy
 from algorithms import MWURegretTracker, WeightedMajorityRegretTracker
 
+## GRAPH COLORS ##
+COLORS = {
+    "learner": "#1a7cf4",
+    "expected": "#18d18d",
+    "best": "#a78bfa",
+    "bound": "#f87171",
+    "winrate": "#d3d310",
+    
+    "graph_bg": "#1d232b",
+    "graph_axes_bg": "#13161a",
+    "graph_bounding_box": "#30353e",
+    "graph_axis_color": "#2c3139",
+    "graph_text_color": "#cccccc",
+}
+# Apply to global rcParams (https://matplotlib.org/stable/users/explain/customizing.html#customizing-with-dynamic-rc-settings)
+plt.rcParams["figure.facecolor"] = COLORS["graph_bg"]
+plt.rcParams["figure.edgecolor"] = COLORS["graph_bounding_box"]
+plt.rcParams["axes.facecolor"] = COLORS["graph_axes_bg"]
+plt.rcParams["axes.edgecolor"] = COLORS["graph_bounding_box"]
+plt.rcParams["xtick.color"] = COLORS["graph_text_color"]
+plt.rcParams["ytick.color"] = COLORS["graph_text_color"]
+plt.rcParams["grid.color"] = COLORS["graph_axis_color"]
+plt.rcParams["text.color"] = COLORS["graph_text_color"]
+plt.rcParams["axes.labelcolor"] = COLORS["graph_text_color"]
+##################
+
 class TrackedAbstractStrategy(AbstractStrategy):
     def __init__(self, options: IntEnum, regret_tracker: Optional[MWURegretTracker | WeightedMajorityRegretTracker] = None):
         super().__init__(options)
@@ -175,13 +201,14 @@ class TrackedAbstractStrategy(AbstractStrategy):
                 if len(timeSteps) > 1:
                     axs['A'].set_xlim(timeSteps[0], timeSteps[-1])
                 axs['A'].set_ylabel('Probability')
+                axs['A'].set_ylim(0, 1)
                 axs['A'].legend(loc="upper left", fontsize="x-small")
                 
             if show_winrate:
                 if len(winrate_history) > len(timeSteps): # For a race condition where the winrate history is a step ahead of the curren time the graph is processing
                     winrate_history = winrate_history[:len(timeSteps)]
                 
-                axs['C'].plot(timeSteps, winrate_history, linestyle='-', linewidth=2, label="winrate", color="yellow")
+                axs['C'].plot(timeSteps, winrate_history, linestyle='-', linewidth=2, label="winrate", color=COLORS["winrate"])
                 axs['C'].set_title('Learner winrate over time')
                 axs['C'].set_xlabel('Time')
                 if len(timeSteps) > 1:
@@ -192,29 +219,33 @@ class TrackedAbstractStrategy(AbstractStrategy):
                 axs['C'].grid(True, axis='y')
             
             if show_ratio: 
-                axs['D'].plot(timeSteps, ratio_learner, linestyle='-', linewidth=2, label="learner")
+                axs['D'].plot(timeSteps, ratio_learner, linestyle='-', linewidth=2, label="learner", color=COLORS["learner"])
                 if show_expected:
-                    axs['D'].plot(timeSteps, ratio_expected, linestyle='-', linewidth=2, label="expected")
+                    axs['D'].plot(timeSteps, ratio_expected, linestyle='-', linewidth=2, label="expected", color=COLORS["expected"])
                 if show_bound:
-                    axs['D'].plot(timeSteps, ratio_bound, linestyle='--', linewidth=2, label="bound")
+                    axs['D'].plot(timeSteps, ratio_bound, linestyle='--', linewidth=2, label="bound", color=COLORS["bound"])
                 axs['D'].set_title('Loss ratios over time')
                 axs['D'].set_xlabel('Time')
+                if len(timeSteps) > 1:
+                    axs['D'].set_xlim(timeSteps[0], timeSteps[-1])
                 axs['D'].set_ylabel('Loss ratio')
                 axs['D'].legend(loc="upper left", fontsize="x-small")
+                axs['D'].grid(True, axis='y')
             
             ## LOSSES GRAPH
-            axs['B'].plot(timeSteps, history_learner, linestyle='-', linewidth=2, label="learner")
+            axs['B'].plot(timeSteps, history_learner, linestyle='-', linewidth=2, label="learner", color=COLORS["learner"])
             if show_expected:
-                axs['B'].plot(timeSteps, history_expected, linestyle='-', linewidth=2, label="expected")
-            axs['B'].plot(timeSteps, history_best, linestyle=':', linewidth=2, label="best")
+                axs['B'].plot(timeSteps, history_expected, linestyle='-', linewidth=2, label="expected", color=COLORS["expected"])
+            axs['B'].plot(timeSteps, history_best, linestyle=':', linewidth=2, label="best", color=COLORS["best"])
             if show_bound:
-                axs['B'].plot(timeSteps, history_bound, linestyle='--', linewidth=2, label="bound")
+                axs['B'].plot(timeSteps, history_bound, linestyle='--', linewidth=2, label="bound", color=COLORS["bound"])
             axs['B'].set_title('Cumulative loss over time')
             axs['B'].set_xlabel('Time')
             if len(timeSteps) > 1:
                 axs['B'].set_xlim(timeSteps[0], timeSteps[-1])
             axs['B'].set_ylabel('Cum. loss')
-            axs['B'].legend(loc="upper left", fontsize="small")
+            axs['B'].legend(loc="upper left", fontsize="x-small")
+            axs['B'].grid(True, axis='y')
                 
             # Fix layout (overlap)
             fig.tight_layout(pad=1.5)

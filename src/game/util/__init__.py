@@ -1,5 +1,6 @@
 from .Button import Button
 from .TextLabel import TextLabel
+from .Panel import Panel
 from .Switch import Switch
 from .NumberInput import NumberInput
 from .FileView import FileView

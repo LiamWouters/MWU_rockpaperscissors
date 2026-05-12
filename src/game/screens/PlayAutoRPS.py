@@ -22,7 +22,7 @@ class PlayAutoRPS(GameScreen):
         self.elements["BACK_BUTTON"] = Button(
             pos=(100, 50),
             font=get_font(18),
-            text="BACK",
+            text="<- BACK",
         )
         self.elements["STATUS_TEXT"] = TextLabel(
             pos=(self.screen.get_width() * 50/100, self.screen.get_height() * 16/100),

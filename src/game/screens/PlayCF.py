@@ -1,6 +1,6 @@
 import pygame, os, random, time, copy
 from game import CFLoss
-from game.util import GAMESTATE, GAMES, COINFACE, get_font, Button, FileView, NumberInput, TextLabel, Switch, ImageView
+from game.util import GAMESTATE, GAMES, COINFACE, get_font, Button, FileView, NumberInput, TextLabel, Switch, ImageView, Panel
 from algorithms import WeightedMajorityRegretTracker, MWURegretTracker
 from strategies import WeightedMajorityPlayer, MWURandomPlayer
 from .GameScreen import *
@@ -40,7 +40,7 @@ class PlayCF(GameScreen):
         self.elements["BACK_BUTTON"] = Button(
             pos=(100, 50),
             font=get_font(18),
-            text="BACK",
+            text="<- BACK",
         )
         self.elements["HISTORY_VIEW"] = FileView(
             pos=(self.screen.get_width() * 10/100, self.screen.get_height() * 50/100),
@@ -50,13 +50,16 @@ class PlayCF(GameScreen):
             preamble="HISTORY:",
             show_bounding_box=True
         )
+        self.elements["HISTORY_PANEL"] = Panel(
+            elements=[self.elements["HISTORY_VIEW"]]
+        )
         self.elements["HEADS_CHANCE_INPUT_TEXT"] = TextLabel(
-            pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 15/100),
+            pos=(self.screen.get_width() * 29/100, self.screen.get_height() * 15/100),
             font=get_font(16),
             text="Set Heads Chance (%):"
         )
         self.elements["HEADS_CHANCE_INPUT"] = NumberInput(
-            pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 18/100),
+            pos=(self.screen.get_width() * 29/100, self.screen.get_height() * 18/100),
             font=get_font(16),
             fixed_width=135,
             callback=self._set_heads_chance,
@@ -66,12 +69,12 @@ class PlayCF(GameScreen):
             upperLimit=100
         )
         self.elements["ALPHA_INPUT_TEXT"] = TextLabel(
-            pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 22/100),
+            pos=(self.screen.get_width() * 29/100, self.screen.get_height() * 22/100),
             font=get_font(16),
             text="Set Alpha (LR):"
         )
         self.elements["ALPHA_INPUT"] = NumberInput(
-            pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 25/100),
+            pos=(self.screen.get_width() * 29/100, self.screen.get_height() * 25/100),
             font=get_font(16),
             fixed_width=135,
             callback=self._set_alpha,
@@ -81,12 +84,12 @@ class PlayCF(GameScreen):
             upperLimit=0.5
         )
         self.elements["MAX_T_TEXT"] = TextLabel(
-            pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 29/100),
+            pos=(self.screen.get_width() * 29/100, self.screen.get_height() * 29/100),
             font=get_font(16),
             text="Set max time horizon:"
         )
         self.elements["MAX_T_INPUT"] = NumberInput(
-            pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 32/100),
+            pos=(self.screen.get_width() * 29/100, self.screen.get_height() * 32/100),
             font=get_font(16),
             fixed_width=135,
             callback=self._set_max_time_horizon,
@@ -95,12 +98,12 @@ class PlayCF(GameScreen):
             lowerLimit=1
         )
         self.elements["AUTO_INTERVAL_TEXT"] = TextLabel(
-            pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 36/100),
+            pos=(self.screen.get_width() * 29/100, self.screen.get_height() * 36/100),
             font=get_font(16),
             text="Set auto interval (ms):"
         )
         self.elements["AUTO_INTERVAL_INPUT"] = NumberInput(
-            pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 39/100),
+            pos=(self.screen.get_width() * 29/100, self.screen.get_height() * 39/100),
             font=get_font(16),
             fixed_width=135,
             callback=self._set_interval,
@@ -109,51 +112,78 @@ class PlayCF(GameScreen):
             lowerLimit=0
         )
         self.elements["AUTO_TOGGLE"] = Switch(
-            pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 43/100),
+            pos=(self.screen.get_width() * 29/100, self.screen.get_height() * 43/100),
             font=get_font(16),
             slider_size=(35,20),
-            option1text="Auto Play"
+            option1text="Auto Play",
+            show_bg=True
+        )
+        self.elements["SETTINGS_PANEL"] = Panel(
+            elements=[
+                self.elements["HEADS_CHANCE_INPUT_TEXT"],
+                self.elements["HEADS_CHANCE_INPUT"],
+                self.elements["ALPHA_INPUT_TEXT"],
+                self.elements["ALPHA_INPUT"],
+                self.elements["MAX_T_TEXT"],
+                self.elements["MAX_T_INPUT"],
+                self.elements["AUTO_INTERVAL_TEXT"],
+                self.elements["AUTO_INTERVAL_TEXT"],
+                self.elements["AUTO_TOGGLE"],
+            ],
+            y_padding=5,
+            x_padding=4
         )
         self.elements["ROLL_BUTTON"] = Button(
-            pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 50/100),
+            pos=(self.screen.get_width() * 29/100, self.screen.get_height() * 51/100),
             font=get_font(35),
             text="FLIP COIN",
             show_bounding_box=True
         )
         self.elements["LATEST_ROLL"] = TextLabel(
-            pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 55/100),
+            pos=(self.screen.get_width() * 29/100, self.screen.get_height() * 56/100),
             font=get_font(18),
             text="Latest Roll:",
         )
         self.elements["TOTAL_ROLLS"] = TextLabel(
-            pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 59/100),
+            pos=(self.screen.get_width() * 29/100, self.screen.get_height() * 60/100),
             font=get_font(16),
             text=f"Total Rolls:",
         )
         self.elements["PREDICTION_MWU"] = TextLabel(
-            pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 66/100),
+            pos=(self.screen.get_width() * 29/100, self.screen.get_height() * 66/100),
             font=get_font(18),
             text="MWU Prediction:",
         )
         self.elements["PREDICTION_WM"] = TextLabel(
-            pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 70/100),
+            pos=(self.screen.get_width() * 29/100, self.screen.get_height() * 70/100),
             font=get_font(18),
             text="WM Prediction:",
         )
+        self.elements["PREDICTIONS_PANEL"] = Panel(
+            elements=[self.elements["PREDICTION_MWU"], self.elements["PREDICTION_WM"]],
+            y_padding=2,
+            x_padding=4
+        )
         self.elements["GRAPH_SWITCH"] = Switch(
-            pos=(self.screen.get_width() * 27/100, self.screen.get_height() * 80/100),
+            pos=(self.screen.get_width() * 29/100, self.screen.get_height() * 80/100),
             font=get_font(16),
             slider_size=(35,20),
             option1text="MWU",
-            option2text="WM"
+            option2text="WM",
+            show_bg=True
         )
         
         ### GRAPH
         self.elements["GRAPH_VIEW"] = ImageView(
-            pos=(self.screen.get_width() * 70/100, self.screen.get_height() * 50/100),
+            pos=(self.screen.get_width() * 70/100, self.screen.get_height() * 48/100),
             image=None,
             show_bounding_box=False,
         ) 
+        self.elements["GRAPH_VIEW_PANEL"] = Panel(
+            elements=[self.elements["GRAPH_VIEW"]],
+            x_padding=2,
+            y_padding=2
+        )
         # Graph settings
         self.elements["GRAPH_LIMIT_TEXT"] = TextLabel(
             pos=(self.screen.get_width() * 60/100, self.screen.get_height() * 87/100),
@@ -198,6 +228,19 @@ class PlayCF(GameScreen):
             font=get_font(16),
             slider_size=(35,20),
             option1text="Hide ratios"
+        )
+        self.elements["GRAPH_SETTINGS_PANEL"] = Panel(
+            elements=[
+                self.elements["GRAPH_LIMIT_TEXT"],
+                self.elements["GRAPH_LIMIT_INPUT"],
+                self.elements["GRAPH_EXPECTED_TOGGLE"],
+                self.elements["GRAPH_BOUND_TOGGLE"],
+                self.elements["GRAPH_WINRATE_TOGGLE"],
+                self.elements["GRAPH_WEIGHTS_TOGGLE"],
+                self.elements["GRAPH_RATIO_TOGGLE"],
+            ],
+            x_padding=2,
+            y_padding=2
         )
         
         self.reset()
@@ -314,6 +357,8 @@ class PlayCF(GameScreen):
                 show_weights=self.show_graph_weights,
                 show_bound=self.show_graph_bound,
                 show_expected=self.show_graph_expected,
+                show_winrate=self.show_graph_winrate,
+                show_ratio=self.show_graph_ratio,
                 size=(700, 500),
                 limit_timesteps=self.limit_graph_timesteps
             )

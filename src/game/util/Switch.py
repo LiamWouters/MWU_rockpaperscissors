@@ -1,6 +1,22 @@
 import pygame
 from .UIelement import UIelement
 
+COLORS_DEFAULT_2_OPTIONS = {
+    "bg_off": "#777777",
+    "bg_on": "#777777",
+    "circle": "#ffffff",
+    "text_default": "#cccccc",
+    "text_hover": "#555555"
+}
+
+COLORS_DEFAULT_1_OPTION = {
+    "bg_off": "#777777",
+    "bg_on": "#6D92D7",
+    "circle": "#ffffff",
+    "text_default": "#cccccc",
+    "text_hover": "#555555"
+}
+
 class Switch(UIelement):
     def __init__(self, 
                  pos: tuple[int,int], 
@@ -11,21 +27,23 @@ class Switch(UIelement):
                  option1text="LeftOption",
                  option2text=None,
                  start_state=False,
-                 colors={
-                     "bg_off": "#777777",
-                     "bg_on": "#5684D8",
-                     "circle": "#ffffff",
-                     "text_default": "#cccccc",
-                     "text_hover": "#555555"
-                 },
-                 show_bounding_box=False):
-        super().__init__(pos, size[0], size[1], show_bounding_box=show_bounding_box)
+                 colors=None,
+                 show_bounding_box=False,
+                 show_bg=False,
+                 active=True):
+        super().__init__(pos, size[0], size[1], show_bounding_box=show_bounding_box, show_bg=show_bg, active=active)
         
         self.font = font
-        self.colors = colors
         self.option1_raw = option1text
         self.option2_raw = option2text
         self.state = start_state # False is Left, True is Right
+        
+        # Colors
+        if colors is not None:
+            self.colors = colors
+        else:
+            self.colors = COLORS_DEFAULT_1_OPTION if option2text is None else COLORS_DEFAULT_2_OPTIONS
+            
         
         # Main slider bg
         self.slider_bg_rect = pygame.Rect(0, 0, slider_size[0], slider_size[1])

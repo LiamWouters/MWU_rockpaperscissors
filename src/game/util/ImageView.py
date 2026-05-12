@@ -8,9 +8,10 @@ class ImageView(UIelement):
     def __init__(self, 
                  pos, 
                  image: Optional[pygame.Surface] = None,
-                 show_bounding_box=False, 
+                 show_bounding_box=False,
+                 show_bg=False,
                  active=True):
-        super().__init__(pos, EMPTY_SIZE[0], EMPTY_SIZE[1], show_bounding_box, active)
+        super().__init__(pos, EMPTY_SIZE[0], EMPTY_SIZE[1], show_bounding_box, show_bg=show_bg, active=active)
         self._surface = None
 
         self.set_image(image)
