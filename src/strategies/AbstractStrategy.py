@@ -10,6 +10,7 @@ class AbstractStrategy(ABC):
         """
         super().__init__()
         self.options = options 
+        self.name = self.__class__.__name__
 
     @abstractmethod
     def play(self) -> MOVES | COINFACE:

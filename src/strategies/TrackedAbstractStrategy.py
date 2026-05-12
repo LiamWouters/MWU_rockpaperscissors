@@ -109,7 +109,7 @@ class TrackedAbstractStrategy(AbstractStrategy):
     def _start_thread(self, show_weights, show_bound, show_expected, show_winrate, show_ratio, size, limit_timesteps):
         """ Copy the data to plot in its current state for the thread """
         probability_history  = list(self.probability_history)
-        expert_names  = [type(e).__name__ for e in self._experts]
+        expert_names  = [e.name for e in self._experts]
         tracker       = self._regret_tracker
  
         t = None

@@ -12,6 +12,7 @@ class ConstantGuessExpert(AbstractStrategy):
     def __init__(self, always_guess: COINFACE):
         super().__init__(COINFACE)
         self.always_guess = always_guess
+        self.name = f"{self.name}_{always_guess.name}"
 
     def play(self) -> COINFACE:
         return self.always_guess

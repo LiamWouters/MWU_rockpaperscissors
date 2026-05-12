@@ -22,6 +22,7 @@ class FirstRandomThenFixedExpert(AbstractStrategy):
     def play(self) -> MOVES:
         if self._fixed_move is None:
             self._fixed_move = self._rng.choice(list(MOVES))
+            self.name = f"{self.name}_{self._fixed_move.name}"
         return self._fixed_move
 
     def update(self, outcome: MOVES):
