@@ -80,12 +80,13 @@ class WeightedMajorityPlayer(TrackedAbstractStrategy):
 
         self._wm.update(expert_losses)
         
-        self.win_history.append(int(self._last_prediction_int == outcome))
         self.probability_history.append(self._wm.probabilities)
 
         learner_loss = self._loss_computer.compute_loss(
             self._last_prediction_int, outcome
         )
+        
+        self.win_history.append(int(learner_loss == 0))
 
         if self._regret_tracker is not None:
             self._regret_tracker.update(
