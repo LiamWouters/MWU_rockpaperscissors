@@ -1,5 +1,4 @@
-import io
-import threading
+import io, threading, os
  
 import numpy as np
 import matplotlib
@@ -39,6 +38,9 @@ plt.rcParams["text.color"] = COLORS["graph_text_color"]
 plt.rcParams["axes.labelcolor"] = COLORS["graph_text_color"]
 ##################
 
+GRAPH_PATH = os.path.join(os.getcwd(), "graphs")
+FINAL_GRAPH_PATH = os.path.join(GRAPH_PATH, "final_graph.png")
+
 class TrackedAbstractStrategy(AbstractStrategy):
     def __init__(self, options: IntEnum, regret_tracker: Optional[MWURegretTracker | WeightedMajorityRegretTracker] = None):
         super().__init__(options)
@@ -65,7 +67,8 @@ class TrackedAbstractStrategy(AbstractStrategy):
         show_winrate: bool = True,
         show_ratio: bool = True,
         size: tuple[int, int] = (500, 500),
-        limit_timesteps: Optional[int] = None
+        limit_timesteps: Optional[int] = None,
+        save_to_file: bool = False
     ) -> None:
         """
         Starts a background thread to render the MWU state graph if there is not one currently running.
@@ -83,6 +86,7 @@ class TrackedAbstractStrategy(AbstractStrategy):
                 "show_ratio": show_ratio,
                 "size": size,
                 "limit_timesteps": limit_timesteps,
+                "save_to_file": save_to_file
             })
             return
         
@@ -94,7 +98,8 @@ class TrackedAbstractStrategy(AbstractStrategy):
             show_winrate=show_winrate,
             show_ratio=show_ratio,
             size=size,
-            limit_timesteps=limit_timesteps
+            limit_timesteps=limit_timesteps,
+            save_to_file=save_to_file
         )
     
     def get_new_graph_surface(self):
@@ -106,7 +111,7 @@ class TrackedAbstractStrategy(AbstractStrategy):
             self._graph_surface = None
         return surface
     
-    def _start_thread(self, show_weights, show_bound, show_expected, show_winrate, show_ratio, size, limit_timesteps):
+    def _start_thread(self, show_weights, show_bound, show_expected, show_winrate, show_ratio, size, limit_timesteps, save_to_file: bool = False):
         """ Copy the data to plot in its current state for the thread """
         probability_history  = list(self.probability_history)
         expert_names  = [e.name for e in self._experts]
@@ -134,7 +139,8 @@ class TrackedAbstractStrategy(AbstractStrategy):
                 history_learner,
                 history_expected,
                 history_best,
-                history_bound
+                history_bound,
+                save_to_file
             ),
             daemon=True
         )
@@ -152,9 +158,14 @@ class TrackedAbstractStrategy(AbstractStrategy):
         history_expected,
         history_best,
         history_bound,
+        save_to_file: bool = False
     ):
         """ Draws the plot on a different thread and stores to a pygame.Surface (self._graph_surface) """
         try:
+            if save_to_file:
+                show_weights = show_ratio = show_bound = show_expected = show_winrate = True
+                size = (1000,1250)
+            
             if show_weights and len(probability_history) == 0:
                 show_weights = False
             
@@ -251,15 +262,18 @@ class TrackedAbstractStrategy(AbstractStrategy):
             fig.tight_layout(pad=1.5)
                             
             # Save figure to memory buffer 
-            buf = io.BytesIO()
-            fig.savefig(buf, format="png")
+            if save_to_file:
+                fig.savefig(FINAL_GRAPH_PATH)
+            else:
+                buf = io.BytesIO()
+                fig.savefig(buf, format="png")
+                buf.seek(0)
+                surface = pygame.image.load(buf, "MWU_graph.png")
+                with self._graph_lock:
+                    self._graph_surface = surface
+            
             plt.close(fig)
  
-            buf.seek(0)
-            surface = pygame.image.load(buf, "MWU_graph.png")
- 
-            with self._graph_lock:
-                self._graph_surface = surface
  
         except Exception as e:
             print(f"Graph render error: {e}")

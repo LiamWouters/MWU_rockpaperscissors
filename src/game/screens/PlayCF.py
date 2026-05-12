@@ -340,7 +340,7 @@ class PlayCF(GameScreen):
         self.limit_graph_timesteps = int(value)
         self._draw_current_graph()
     
-    def _draw_current_graph(self):
+    def _draw_current_graph(self, save_to_file: bool = False):
         if self.current_mwu:
             self.MWU.draw_graph(
                 show_weights=self.show_graph_weights,
@@ -349,7 +349,8 @@ class PlayCF(GameScreen):
                 show_winrate=self.show_graph_winrate,
                 show_ratio=self.show_graph_ratio,
                 size=(700, 500),
-                limit_timesteps=self.limit_graph_timesteps
+                limit_timesteps=self.limit_graph_timesteps,
+                save_to_file=save_to_file
             )
         else:
             self.WM.draw_graph(
@@ -359,12 +360,14 @@ class PlayCF(GameScreen):
                 show_winrate=self.show_graph_winrate,
                 show_ratio=self.show_graph_ratio,
                 size=(700, 500),
-                limit_timesteps=self.limit_graph_timesteps
+                limit_timesteps=self.limit_graph_timesteps,
+                save_to_file=save_to_file
             )
     
     def _roll_coin(self):
         if self.total_rolls > self.MWU.regret_tracker._max_t:
             self._set_auto(False)
+            self._draw_current_graph(save_to_file=True)
             return
         
         normalized_heads_chance = self.heads_chance/100
